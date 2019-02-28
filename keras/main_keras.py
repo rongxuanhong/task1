@@ -5,7 +5,6 @@ sys.path.insert(1, os.path.join(sys.path[0], '../utils'))
 import numpy as np
 import argparse
 import h5py
-import math
 import time
 import logging
 
@@ -16,26 +15,26 @@ from datetime import datetime
 from data_generator import DataGenerator, TestDataGenerator
 from utilities import (create_folder, get_filename, create_logging,
                        calculate_confusion_matrix, calculate_accuracy,
-                       plot_confusion_matrix, print_accuracy,
+                       plot_confusion_matrix, print_accuracy, calculate_stats,
                        write_leaderboard_submission, write_evaluation_submission, compute_time_consumed)
-from models_keras import BaselineCnn, Vggish
-from DenseNet import DenseNet
-# from VGGstyle import Vggish
-from CLR import CyclicLR
+from models_keras import BaselineCnn, Vggish, Vggish_single_attention, Vggish_multi_attention, \
+    Vggish_base_single_attention, Vggish_attention
+# from CLR import CyclicLR
 import config
 
-#
-# model = DenseNet(depth_of_model=190, growth_rate=32, num_of_blocks=4, output_classes=10,
+# model = DenseNet(depth_of_model=190, growth_rate=32, num_of_blocks=3, output_classes=10,
 #                  num_layers_in_each_block=5,
-#                  bottleneck=True, compression=0.5, weight_decay=0, dropout_rate=0, pool_initial=True,
+#                  bottleneck=False, compression=1.0, weight_decay=0, dropout_rate=0, pool_initial=True,
 #                  include_top=True)
-# model = model.build(input_shape=(2, 320, 64)) #70.2 0031.log
+# model = model.build(input_shape=(3, 320, 64))  # 72.0 0130.log
 # model = DenseNet([5, 5, 5, 5, 5], (2, 320, 64), classes_num=10)
-model = Vggish(320, 64, 10)  # 71.3 0032.log
+# model = DenseNet([5, 5, 5, 5], (3, 320, 64), 10)
+# model = Vggish(431, 84, 10)  # 71.3 0032.log
+model = Vggish_attention(320, 64, 10)  # 71.3 0032.log
 batch_size = 8
 
 
-def evaluate(model, generator, data_type, devices, max_iteration, a):
+def evaluate(model, generator, data_type, devices, max_iteration, ):
     """Evaluate
 
     Args:
@@ -55,11 +54,6 @@ def evaluate(model, generator, data_type, devices, max_iteration, a):
                                                 devices=devices,
                                                 shuffle=True,
                                                 max_iteration=max_iteration)
-    # else:
-    #     ### 使用训练集的镜像验证
-    #     generate_func = generator.generate_validate_mirror(devices=devices,
-    #                                                        shuffle=True,
-    #                                                        max_iteration=max_iteration)
 
     # Forward
     dict = forward(model=model,
@@ -67,24 +61,24 @@ def evaluate(model, generator, data_type, devices, max_iteration, a):
                    return_target=True)
 
     outputs = dict['output']  # (audios_num, classes_num)
-    targets = dict['target']  # (audios_num,)
+    targets = dict['target']  # (audios_num, classes_num)
 
     predictions = np.argmax(outputs, axis=-1)  # (audios_num,)
 
     # Evaluate
     classes_num = outputs.shape[-1]
 
+    # categorical_crossentropy 必须配合softmax使用 binary_crossentropy 配合sigmoid 使用
     loss = K.mean(keras.metrics.categorical_crossentropy(K.constant(targets), K.constant(outputs)))
-    # loss = K.mean(categorical_focal_loss(gamma=3, a=a)(K.constant(targets), K.constant(outputs)))
     loss = K.eval(loss)
 
     # confusion_matrix = calculate_confusion_matrix(
     #     targets, predictions, classes_num)
 
     targets = np.argmax(targets, axis=-1)
+
     accuracy = calculate_accuracy(targets, predictions, classes_num,
                                   average='macro')
-
     return accuracy, loss
 
 
@@ -140,42 +134,6 @@ def forward(model, generate_func, return_target):
     return dict
 
 
-def categorical_focal_loss(gamma=3., a=1.0):
-    def focal_loss(y_true, y_pred):
-        """
-        :param y_true: A tensor of the same shape as `y_pred` [batch_size, nb_class] one-hot
-        :param y_pred: A tensor resulting from a softmax [batch_size, nb_class]
-        :return: Output tensor.
-        """
-        y_pred /= K.sum(y_pred, len(y_pred.get_shape()) - 1, keepdims=True)
-        # y_true = K.cast(y_true, tf.int64)
-        # y_true = tf.one_hot(y_true, y_pred.shape[1])
-        # y_true = K.cast(y_true, tf.float32)
-        epsilon = K.epsilon()
-        # # clip to prevent NaN's and Inf's
-        y_pred = K.clip(y_pred, epsilon, 1. - epsilon)
-
-        # Cross entropy
-        ce = y_true * K.log(y_pred)  ##  element_wise multipy
-
-        weight = K.pow(1 - y_pred, gamma)  # 在多分类中alpha参数是没有效果的，每个样本都乘以了同样的权重
-
-        # Now fl has a shape of [batch_size, nb_class]
-        # alpha = [0.7, 0.8, 0.8, 0.5, 0.5, 1.0, 0.8, 0.7, 0.5, 0.9] # tram变差了很多，步行街差了一点点　其他都略微提升
-        # alpha = [0.7, 0.8, 0.8, 0.5, 0.5, 1.0, 0.8, 0.8, 0.5, 1.0] 71.4
-        # alpha = [0.7, 0.8, 0.8, 0.5, 0.5, 1.0, 0.8, 0.6, 0.5, 0.7] 72.4
-        # alpha = [0.7, 0.8, 0.8, 0.5, 0.5, 0.8, 0.8, 0.7, 0.5, 0.8]  # 72.5 步行街变差
-        # alpha = [0.7, 0.8, 0.8, 0.5, 0.5, 0.8, 0.8, 1.0, 0.5, 0.8] #72.6
-        alpha = [0.7, 0.8, 0.8, 0.5, 0.5, 0.8, 0.8, 0.9, 0.5, 0.8]  # 72.7 最后一轮达到
-        fl = alpha * weight * ce
-
-        # Both reduce_sum and reduce_max are ok
-        reduce_fl = -K.sum(fl, axis=-1)
-        return reduce_fl
-
-    return focal_loss
-
-
 def train(args):
     # Arugments & parameters
     dataset_dir = args.dataset_dir
@@ -208,11 +166,6 @@ def train(args):
 
     if validate:
 
-        # dev_train_csv = os.path.join(workspace, 'folds',
-        #                              'fold{}_train.txt'.format(holdout_fold))
-        #
-        # dev_validate_csv = os.path.join(workspace, 'folds',
-        #                                 'fold{}_evaluate.txt'.format(holdout_fold))
         dev_train_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
                                      'fold{}_train.txt'.format(holdout_fold))
 
@@ -250,7 +203,7 @@ def train(args):
     # clr = CyclicLR(model=model, base_lr=0.0001, max_lr=0.0005,
     #                step_size=5000., mode='triangular')
     # clr.on_train_begin()
-    max_iteration = 765 * 15
+    max_iteration = 10000
     max_acc = 0
 
     for (iteration, (batch_x, batch_y)) in enumerate(generator.generate_train()):
@@ -264,7 +217,7 @@ def train(args):
                                          generator=generator,
                                          data_type='train',
                                          devices=devices,
-                                         max_iteration=None, a=a)
+                                         max_iteration=None, )
 
             logging.info('tr_acc: {:.3f}, tr_loss: {:.3f}'.format(
                 tr_acc, tr_loss))
@@ -274,11 +227,11 @@ def train(args):
                                              generator=generator,
                                              data_type='validate',
                                              devices=devices,
-                                             max_iteration=None, a=a)
+                                             max_iteration=None, )
 
                 if va_acc >= max_acc:
                     max_acc = va_acc
-                    if iteration >= 2000:
+                    if iteration >= 4000:
                         save_out_path = os.path.join(
                             models_dir, 'md_{}_iters_max.h5'.format(iteration))
 
@@ -306,11 +259,11 @@ def train(args):
             model.save(save_out_path)
             logging.info('Model saved to {}'.format(save_out_path))
 
-        # Reduce learning rate
+        # # # Reduce learning rate
         if iteration % 300 == 0 and iteration > 0:
             old_lr = float(K.get_value(model.optimizer.lr))
             K.set_value(model.optimizer.lr, old_lr * 0.9)
-
+        #
         model.train_on_batch(batch_x, batch_y)
         # clr.on_batch_end()
         # Stop learning
@@ -379,12 +332,12 @@ def inference_data_to_truncation(args):
     #                           'md_{}_iters.h5'.format(iteration))
 
     model_path = os.path.join(workspace, 'appendixes',
-                              'md_{}_iters_max_71.3.h5'.format(iteration))
+                              'md_{}_iters_max_74.5.h5'.format(iteration))
 
     hdf5_train_path = os.path.join(truncation_dir,
-                                   'train_hpss_l-r_8300.h5')
+                                   'train_hpss_l+r_9100.h5')
     hdf5_validate_path = os.path.join(truncation_dir,
-                                      'validate_hpss_l-r_8300.h5')
+                                      'validate_hpss_l+r_9100.h5')
     train_hf = h5py.File(hdf5_train_path, 'w')
     validate_hf = h5py.File(hdf5_validate_path, 'w')
 
@@ -411,7 +364,7 @@ def inference_validation_data(args):
     workspace = args.workspace
     holdout_fold = args.holdout_fold
     iteration = args.iteration
-    filename = args.filename
+    # filename = args.filename
 
     # data_type = args.data_type
 
@@ -432,13 +385,13 @@ def inference_validation_data(args):
     dev_validate_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
                                     'fold{}_evaluate.txt'.format(holdout_fold))
 
-    model_path = os.path.join(workspace, 'models', subdir, filename,
-                              'holdout_fold={}'.format(holdout_fold),
-                              'md_{}_iters_max.h5'.format(iteration))
-    # model_path = os.path.join(workspace, 'appendixes',
-    #                           'md_{}_iters_max_72.5.h5'.format(iteration))
+    # model_path = os.path.join(workspace, 'models', subdir, filename,
+    #                           'holdout_fold={}'.format(holdout_fold),
+    #                           'md_{}_iters_max.h5'.format(iteration))
+    model_path = os.path.join(workspace, 'appendixes',
+                              'md_{}_iters_max_74.5.h5'.format(iteration))
 
-    model = keras.models.load_model(model_path, custom_objects={'focal_loss': categorical_focal_loss(3)})
+    model = keras.models.load_model(model_path)
 
     # Predict & evaluate
     for device in devices:
@@ -462,6 +415,7 @@ def inference_validation_data(args):
         outputs = dict['output']  # (audios_num, classes_num)
         targets = dict['target']  # (audios_num, classes_num)
 
+        # 多分类交叉熵
         predictions = np.argmax(outputs, axis=-1)
 
         classes_num = outputs.shape[-1]
@@ -484,6 +438,10 @@ def inference_validation_data(args):
             title='Device {}'.format(device.upper()),
             labels=labels,
             values=class_wise_accuracy)
+        # predictions = np.select([outputs >= 0.5, outputs < 0.5], [1, 0])  # 简化if else
+        # print(predictions.shape)
+        # predictions = np.mean(predictions, axis=3)[..., 0]  ## ... 表示省略前面的所有冒号的简写
+        # predictions = np.argmax(predictions, axis=1)
 
 
 def inference_leaderboard_data(args):
