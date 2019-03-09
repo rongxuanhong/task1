@@ -45,8 +45,8 @@ class LogMelExtractor():
         x = x.T
 
         x = np.dot(x, self.melW)
-        x = np.log(x + 1e-8)
-        x = x.astype(np.float32)
+        # x = np.log(x + 1e-8)
+        # x = x.astype(np.float32)
 
         return x
 
@@ -60,6 +60,24 @@ def calculate_logmel(audio_path, sample_rate, feature_extractor):
 
     # Extract feature
     feature = feature_extractor.transform(audio)
+
+    return feature
+
+
+def calculate_logdelta(audio_path, sample_rate, feature_extractor):
+    # Read audio
+    (audio, fs) = librosa.load(audio_path, sr=44100)
+
+    '''We do not divide the maximum value of an audio here because we assume 
+    the low energy of an audio may also contain information of a scene. '''
+
+    # Extract feature
+    feature = feature_extractor.transform(audio)
+    # feature = feature.astype(np.float32)
+    # feature1 = librosa.feature.delta(feature, width=3)
+    feature = librosa.feature.delta(feature, width=11)
+    feature = np.log(feature + 1e-8)
+    # feature3 = librosa.feature.delta(feature, width=19)
 
     return feature
 
@@ -99,7 +117,6 @@ def calculate_three_logmel(audio_path, sample_rate, feature_extractor):
 
     '''We do not divide the maximum value of an audio here because we assume 
     the low energy of an audio may also contain information of a scene. '''
-
     # Extract feature
     l_r = audio[0] + audio[1]
     audio = np.mean(audio, axis=0)
@@ -122,6 +139,7 @@ def calculate_lrad_logmel(audio_path, sample_rate, feature_extractor):
     # audio = audio.T
     h = audio[0] - audio[1]
     p = audio[0] + audio[1]
+    librosa.cqt()
     h_feature = feature_extractor.transform(h)
     p_feature = feature_extractor.transform(p)
 
@@ -183,7 +201,7 @@ def calculate_multi_features(args):
     audio_dir = os.path.join(dataset_dir, subdir, 'audio')
 
     if data_type == 'development':
-        meta_csv = os.path.join(dataset_dir, subdir, 'meta.csv')
+        meta_csv = os.path.join(dataset_dir, subdir, 'meta_mix.csv')
 
     elif data_type in ['leaderboard', 'evaluation']:
         evaluation_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
@@ -194,7 +212,7 @@ def calculate_multi_features(args):
                                  'mini_{}.h5'.format(data_type))
     else:
         hdf5_path = os.path.join(workspace, 'features', 'logmel', subdir,
-                                 '{}_hpss_l+r.h5'.format(data_type))
+                                 '{}_hpss_lrad_mix.h5'.format(data_type))
 
     create_folder(os.path.dirname(hdf5_path))
 
@@ -253,7 +271,7 @@ def calculate_multi_features(args):
                                          feature_extractor=feature_extractor)
         '''(seq_len, mel_bins)'''
 
-        print(feature.shape)
+        # print(feature.shape)
 
         hf['feature'].resize((n + 1, 3, seq_len, mel_bins))
         hf['feature'][n] = feature
@@ -262,7 +280,6 @@ def calculate_multi_features(args):
     hf.create_dataset(name='filename',
                       data=[s.encode() for s in audio_names],
                       dtype='S50')
-
     if data_type == 'development':
         hf.create_dataset(name='scene_label',
                           data=[s.encode() for s in scene_labels],
@@ -311,7 +328,7 @@ def calculate_features(args):
                                  'mini_{}.h5'.format(data_type))
     else:
         hdf5_path = os.path.join(workspace, 'features', 'logmel', subdir,
-                                 '{}_128melbin.h5'.format(data_type))
+                                 '{}_delta11.h5'.format(data_type))
 
     create_folder(os.path.dirname(hdf5_path))
 
@@ -365,9 +382,9 @@ def calculate_features(args):
         audio_path = os.path.join(audio_dir, audio_name)
 
         # Extract feature
-        feature = calculate_logmel(audio_path=audio_path,
-                                   sample_rate=sample_rate,
-                                   feature_extractor=feature_extractor)
+        feature = calculate_logdelta(audio_path=audio_path,
+                                     sample_rate=sample_rate,
+                                     feature_extractor=feature_extractor)
         '''(seq_len, mel_bins)'''
 
         print(feature.shape)

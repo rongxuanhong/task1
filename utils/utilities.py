@@ -73,7 +73,7 @@ def read_audio(path, target_fs=None):
     #     audio = librosa.resample(audio, orig_sr=fs, target_sr=target_fs)
     #     fs = target_fs
 
-    return librosa.load(path, mono=False, sr=44100)
+    return librosa.load(path, sr=target_fs, mono=False)
 
 
 def calculate_scalar(x):
@@ -118,7 +118,7 @@ def calculate_accuracy(target, predict, classes_num, average=None):
 
         total[target[n]] += 1
 
-        if target[n] == predict[n]:
+        if target[n] == predict[n]:  # 预测正确的情况
             correctness[target[n]] += 1
 
     accuracy = correctness / total
@@ -229,3 +229,42 @@ def write_evaluation_submission(submission_path, audio_names, predictions):
     f.close()
 
     logging.info('Write result to {}'.format(submission_path))
+
+
+def calculate_stats(output, target):
+    """Calculate statistics including mAP, AUC, etc.
+    Args:
+      output: 2d array, (samples_num, classes_num)
+      target: 2d array, (samples_num, classes_num)
+    Returns:
+      stats: list of statistic of each class.
+    """
+
+    classes_num = target.shape[-1]
+    stats = []
+
+    # Class-wise statistics
+    for k in range(classes_num):
+        # Average precision
+        avg_precision = metrics.average_precision_score(
+            target[:, k], output[:, k], average=None)
+        # AUC
+        auc = metrics.roc_auc_score(target[:, k], output[:, k], average=None)
+
+        # Precisions, recalls
+        (precisions, recalls, thresholds) = metrics.precision_recall_curve(
+            target[:, k], output[:, k])
+
+        # FPR, TPR
+        (fpr, tpr, thresholds) = metrics.roc_curve(target[:, k], output[:, k])
+
+        save_every_steps = 1000  # Sample statistics to reduce size
+        dict = {'precisions': precisions[0::save_every_steps],
+                'recalls': recalls[0::save_every_steps],
+                'AP': avg_precision,
+                'fpr': fpr[0::save_every_steps],
+                'fnr': 1. - tpr[0::save_every_steps],
+                'auc': auc}
+        stats.append(dict)
+
+    return stats

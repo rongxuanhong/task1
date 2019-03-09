@@ -5,13 +5,40 @@ import time
 import logging
 
 from utilities import calculate_scalar, scale
-import config
+import config as config
 import keras
 import sys
 import os
 
 sys.path.insert(1, os.path.join(sys.path[0], '../utils'))
-from data_augmentation import get_random_eraser
+
+
+# def to_categorical_with_label_smoothing(y, num_classes=None, eps=0.1):
+#     """Converts a class vector (integers) to binary class matrix.
+#
+#     E.g. for use with categorical_crossentropy.
+#
+#     # Arguments
+#         y: class vector to be converted into a matrix
+#             (integers from 0 to num_classes).
+#         num_classes: total number of classes.
+#
+#     # Returns
+#         A binary matrix representation of the input.
+#     """
+#     y = np.array(y, dtype='int')
+#     input_shape = y.shape
+#     if input_shape and input_shape[-1] == 1 and len(input_shape) > 1:
+#         input_shape = tuple(input_shape[:-1])
+#     y = y.ravel()
+#     if not num_classes:
+#         num_classes = np.max(y) + 1
+#     n = y.shape[0]
+#     categorical = np.full((n, num_classes), eps / (num_classes - 1), dtype=np.float32)
+#     categorical[np.arange(n), y] = 1 - eps
+#     output_shape = input_shape + (num_classes,)
+#     categorical = np.reshape(categorical, output_shape)
+#     return categorical
 
 
 class DataGenerator(object):
@@ -44,7 +71,10 @@ class DataGenerator(object):
         self.identifiers = [s.decode() for s in hf['identifier'][:]]
         self.source_labels = [s.decode() for s in hf['source_label']]
         # self.y = np.array([lb_to_ix[lb] for lb in self.scene_labels])
-        self.y = np.array([keras.utils.to_categorical(lb_to_ix[lb], len(lb_to_ix)) for lb in self.scene_labels])
+
+        self.y = np.array(
+            [keras.utils.to_categorical(lb_to_ix[lb], len(lb_to_ix)) for lb in
+             self.scene_labels])  # one-hot encode
 
         hf.close()
         logging.info('Loading data time: {:.3f} s'.format(
@@ -136,7 +166,7 @@ class DataGenerator(object):
 
             iteration += 1
             batch_x = self.x[batch_audio_indexes]
-            batch_y = self.y[batch_audio_indexes]
+            batch_y = self.y[batch_audio_indexes]  # 训练时使用标签平滑
 
             # # mixup implementation
             # weight = np.random.beta(0.2, 0.2, batch_size)
@@ -251,94 +281,23 @@ class DataGenerator(object):
                 batch_audio_indexes = audio_indexes[i * batch_size * 2:(i + 1) * batch_size * 2]
                 iteration += 1
 
-                # lam = self.random_state.beta(config.alpha, config.alpha, batch_size)
-                # X_1 = lam.reshape(batch_size, 1, 1)
-                # y_1 = lam.reshape(batch_size)
-                # ## mix up batch example
-                # X1 = self.x[batch_audio_indexes[:batch_size]]
-                # X2 = self.x[batch_audio_indexes[batch_size:]]
-                # y1 = self.y[batch_audio_indexes[:batch_size]]
-                # y2 = self.y[batch_audio_indexes[batch_size:]]
-                # batch_x = X1 * X_1 + X2 * (1 - X_1)
-                # batch_y = y1 * y_1 + y2 * (1 - y_1)
-                batch_x = self.x[batch_audio_indexes]
-                batch_y = self.y[batch_audio_indexes]
+                lam = self.random_state.beta(config.alpha, config.alpha, batch_size)
+                X_1 = lam.reshape(batch_size, 1, 1, 1)
+                y_1 = lam.reshape(batch_size, 1)
+                ## mix up batch example
+                X1 = self.x[batch_audio_indexes[:batch_size]]
+                X2 = self.x[batch_audio_indexes[batch_size:]]
+                y1 = self.y[batch_audio_indexes[:batch_size]]
+                y2 = self.y[batch_audio_indexes[batch_size:]]
+                batch_x = X_1 * X1 + (1 - X_1) * X2
+                batch_y = y_1 * y1 + (1 - y_1) * y2
+                # batch_x = self.x[batch_audio_indexes]
+                # batch_y = self.y[batch_audio_indexes]
 
                 # Transform data
                 batch_x = self.transform(batch_x)
 
                 yield batch_x, batch_y
-
-    def generate_validate_mirror(self, devices, shuffle,
-                                 max_iteration=None):
-        """Generate mini-batch data for evaluation.
-
-        Args:
-          data_type: 'train' | 'validate'
-          devices: list of devices, e.g. ['a'] | ['a', 'b', 'c']
-          max_iteration: int, maximum iteration for validation
-          shuffle: bool
-
-        Returns:
-          batch_x: (batch_size, seq_len, freq_bins)
-          batch_y: (batch_size,)
-          batch_audio_names: (batch_size,)
-        """
-
-        batch_size = self.batch_size
-
-        audio_indexes = np.array(self.train_audio_indexes)
-
-        if shuffle:
-            self.validate_random_state.shuffle(audio_indexes)
-
-        # Get indexes of specific devices
-        devices_specific_indexes = []
-
-        for n in range(len(audio_indexes)):
-            if self.source_labels[audio_indexes[n]] in devices:
-                devices_specific_indexes.append(audio_indexes[n])
-
-        logging.info('Number of {} audios in specific devices {}: {}'.format(
-            'mirror_train', devices, len(devices_specific_indexes)))
-
-        audios_num = len(devices_specific_indexes)
-
-        iteration = 0
-        pointer = 0
-
-        while True:
-
-            if iteration == max_iteration:
-                break
-
-            # Reset pointer
-            if pointer >= audios_num:
-                break
-
-            # Get batch indexes
-            batch_audio_indexes = devices_specific_indexes[
-                                  pointer: pointer + batch_size]
-
-            pointer += batch_size
-
-            iteration += 1
-
-            batch_x = self.x[batch_audio_indexes]
-            batch_y = self.y[batch_audio_indexes]
-            batch_audio_names = self.audio_names[batch_audio_indexes]
-
-            # Transform data
-            batch_x = self.transform(batch_x)
-            batch_x_new = []
-            for i in range(batch_x.shape[0]):
-                x = batch_x[i]
-                for j in range(x.shape[0]):
-                    x[j] = np.fliplr(x[j])
-                batch_x_new.append(x)
-
-            batch_x = np.stack(batch_x_new, axis=0)
-            yield batch_x, batch_y, batch_audio_names
 
     def transform(self, x):
         """Transform data. 

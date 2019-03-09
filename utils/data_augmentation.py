@@ -1,4 +1,9 @@
 import numpy as np
+import pandas as pd
+import os
+import librosa
+from utils.utilities import compute_time_consumed
+import time
 
 
 ## random erasing
@@ -44,3 +49,70 @@ def get_random_eraser(p=0.5, s_l=0.02, s_h=0.4, r_1=0.3, r_h=1 / 0.3, v_l=0, v_h
         return input_img
 
     return eraser
+
+
+def generate_mix_audio():
+    base_path = '/home/ccyoung/DCase/data/TUT-urban-acoustic-scenes-2018-development'
+    dev_train_csv = os.path.join(base_path, 'evaluation_setup', 'fold1_train.txt')
+
+    data = pd.read_csv(dev_train_csv, sep='\t', names=['file', 'label'])
+    data = data.groupby('label')
+    for name, group in data:
+        print('generate {} audios'.format(name))
+        for index, row in group.iterrows():
+            file_path = os.path.join(base_path, row['file'])
+            audio_name = os.path.splitext(file_path)[0].split('/')[-1]
+            print('generate {} audios'.format(audio_name))
+
+            y1, sr = librosa.load(file_path, mono=False)
+            sample_audio_file = group.sample(n=1).iloc[0]['file']
+            y2, sr = librosa.load(os.path.join(base_path, sample_audio_file), mono=False)
+            y = 0.5 * y1 + 0.5 * y2
+            new_audio_name = str(audio_name) + '_mix.wav'
+            save_path = os.path.join(base_path, 'audio', new_audio_name)
+            librosa.output.write_wav(save_path, y, sr)
+
+
+def generate_fold1_train_mix():
+    base_path = '/home/ccyoung/DCase/data/TUT-urban-acoustic-scenes-2018-development'
+    dev_train_csv = os.path.join(base_path, 'evaluation_setup', 'fold1_train.txt')
+
+    data = pd.read_csv(dev_train_csv, sep='\t', names=['file', 'label'])
+    file, label = [], []
+    for index, row in data.iterrows():
+        file.append(row['file'])
+        file.append(row['file'].replace('.wav', '_mix.wav'))
+        label.append(row['label'])
+        label.append(row['label'])
+    data = pd.DataFrame({'file': file, 'label': label})
+    data.to_csv('fold1_train_mix.txt', header=False, sep='\t', index=False)
+    print(data)
+
+
+def generate_meta_mix():
+    base_path = '/home/ccyoung/DCase/data/TUT-urban-acoustic-scenes-2018-development'
+    dev_train_csv = os.path.join(base_path, 'meta.csv')
+
+    data = pd.read_csv(dev_train_csv, sep='\t')
+    filename, scene_label, identifier, source_label = [], [], [], []
+    for index, row in data.iterrows():
+        if index > 6121:
+            break
+        filename.append(row['filename'])
+        filename.append(row['filename'].replace('.wav', '_mix.wav'))
+        scene_label.append(row['scene_label'])
+        scene_label.append(row['scene_label'])
+        identifier.append(row['identifier'])
+        identifier.append(row['identifier'])
+        source_label.append(row['source_label'])
+        source_label.append(row['source_label'])
+    new_data = pd.DataFrame(
+        data={'filename': filename, 'scene_label': scene_label, 'identifier': identifier, 'source_label': source_label},
+        columns=['filename', 'scene_label', 'identifier', 'source_label'])
+    new_data.to_csv('meta_mix.csv', header=True, sep='\t', index=False)
+    # print(new_data)
+
+
+if __name__ == '__main__':
+    generate_meta_mix()
+    pass

@@ -1,11 +1,13 @@
 sample_rate = 44100
 window_size = 2048
-overlap = 672   # So that there are 320 frames in an audio clip
+overlap = 672  # So that there are 320 frames in an audio clip
+# seq_len = 431
 seq_len = 320
 mel_bins = 64
-alpha=0.2
+# mel_bins = 84
+alpha = 0.2
 
-labels = ['airport', 'bus', 'metro', 'metro_station', 'park', 'public_square', 
+labels = ['airport', 'bus', 'metro', 'metro_station', 'park', 'public_square',
           'shopping_mall', 'street_pedestrian', 'street_traffic', 'tram']
 
 lb_to_ix = {lb: ix for ix, lb in enumerate(labels)}

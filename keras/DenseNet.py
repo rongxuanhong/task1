@@ -1,5 +1,5 @@
 from keras.layers import BatchNormalization, Conv2D, AveragePooling2D, \
-    Dense, Dropout, MaxPool2D, GlobalAveragePooling2D, Input, Activation, Concatenate, SeparableConv2D
+    Dense, Dropout, MaxPool2D, GlobalAveragePooling2D, Input, Activation, Concatenate, SeparableConv2D, Conv2DTranspose
 
 from keras.regularizers import l2
 from keras.models import Model
@@ -24,7 +24,7 @@ class ConvBlock:
                             use_bias=False,
                             data_format=data_format,
                             kernel_initializer='he_uniform',
-                            # kernel_regularizer=l2(weight_decay)
+                            kernel_regularizer=l2(weight_decay)
                             )
         # 初始化本模块所需要的op
         self.batchnorm1 = SwitchNormalization(axis=axis)
@@ -148,7 +148,7 @@ class DenseNet:
         # else:
         #     init_filters = (3, 3)
         #     stride = (1, 1)
-        init_filters = (5, 5)
+        init_filters = (7, 7)
         stride = (1, 1)
         self.num_filters = 2 * self.growth_rate
 
@@ -183,6 +183,8 @@ class DenseNet:
                                self.growth_rate * self.num_layers_in_each_block[i - 1]
             num_filters_after_each_block.append(int(temp_num_filters * self.compression))  # compress filters
 
+        print(num_filters_after_each_block)
+
         # dense block initialization
         self.dense_block = []
         self.transition_blocks = []
@@ -210,13 +212,37 @@ class DenseNet:
         for i in range(self.num_of_blocks - 1):
             output = self.dense_block[i].build(output)
             output = self.transition_blocks[i].build(output)
+            # print(output1.shape)
 
-        output = self.dense_block[self.num_of_blocks - 1].build(output)  # output of the last denseblock
-        output = self.batchnorm2(output)
+        # output = self.dense_block[1].build(output1)
+        # output2 = self.transition_blocks[1].build(output)
+        # print(output2.shape)
+        #
+        # # output = self.dense_block[2].build(output2)
+        # # output3 = self.transition_blocks[2].build(output)
+        # # print(output3.shape)
+
+        output4 = self.dense_block[self.num_of_blocks - 1].build(output)  # output of the last denseblock
+
+        # output = Conv2DTranspose(filters=384, kernel_size=3, strides=2, data_format='channels_first', use_bias=False,
+        #                          kernel_initializer='he_uniform', kernel_regularizer=l2(self.weight_decay))(
+        #     output4)  # 384 40 8
+
+        # x1 = GlobalAveragePooling2D()(output)
+        # x1 = Dropout(0.3)(x1)
+        # output5 = Conv2DTranspose(filters=224, kernel_size=3, strides=2, data_format='channels_first', use_bias=False,
+        #                           kernel_initializer='he_uniform', kernel_regularizer=l2(self.weight_decay))(
+        #     output)  # 224 80 16
+        # x2 = GlobalAveragePooling2D()(output5)
+        # x2 = Dropout(0.3)(x2)
+
+        output = self.batchnorm2(output4)
         output = Activation('relu')(output)
 
         # if self.include_top:
         output = self.last_pool(output)
+        # output = Dropout(0.2)(output)
+        # output = Concatenate()([x1, x2, output])
         output = self.classifier(output)
 
         output = Activation('softmax')(output)
@@ -225,11 +251,10 @@ class DenseNet:
 
 
 def main():
-    import tensorflow as tf
     model = DenseNet(190, 32, 4, 10, 5,
-                     bottleneck=True, compression=0.5, weight_decay=1e-4, dropout_rate=0.2, pool_initial=True,
+                     bottleneck=False, compression=1.0, weight_decay=0, dropout_rate=0, pool_initial=True,
                      include_top=True)
-    model = model.build(input_shape=(2, 320, 64))
+    model = model.build(input_shape=(3, 320, 64))
 
     # model = tf.keras.applications.DenseNet121
     model.summary()

@@ -17,8 +17,8 @@ from utilities import (create_folder, get_filename, create_logging,
                        calculate_confusion_matrix, calculate_accuracy,
                        plot_confusion_matrix, print_accuracy, calculate_stats,
                        write_leaderboard_submission, write_evaluation_submission, compute_time_consumed)
-from models_keras import BaselineCnn, Vggish, Vggish_single_attention, Vggish_multi_attention, \
-    Vggish_base_single_attention, Vggish_attention
+from models_keras import BaselineCnn, Vggish, Vggish_single_attention \
+    , Vggish_attention, Gate_CNN_attention, Vggish_two_attention, Vggish_two_attention2
 # from CLR import CyclicLR
 import config
 
@@ -30,7 +30,7 @@ import config
 # model = DenseNet([5, 5, 5, 5, 5], (2, 320, 64), classes_num=10)
 # model = DenseNet([5, 5, 5, 5], (3, 320, 64), 10)
 # model = Vggish(431, 84, 10)  # 71.3 0032.log
-model = Vggish_attention(320, 64, 10)  # 71.3 0032.log
+model = Vggish_two_attention2(320, 64, 10)  # 71.3 0032.log
 batch_size = 8
 
 
@@ -194,7 +194,8 @@ def train(args):
     generator = DataGenerator(hdf5_path=hdf5_path,
                               batch_size=batch_size,
                               dev_train_csv=dev_train_csv,
-                              dev_validate_csv=dev_validate_csv)
+                              dev_validate_csv=dev_validate_csv,
+                              )
 
     train_bgn_time = time.time()
 
@@ -231,7 +232,7 @@ def train(args):
 
                 if va_acc >= max_acc:
                     max_acc = va_acc
-                    if iteration >= 4000:
+                    if iteration >= 6000:
                         save_out_path = os.path.join(
                             models_dir, 'md_{}_iters_max.h5'.format(iteration))
 
@@ -327,17 +328,17 @@ def inference_data_to_truncation(args):
                                   'holdout_fold={}'.format(holdout_fold))
     create_folder(truncation_dir)
 
-    # model_path = os.path.join(workspace, 'models', subdir, filename,
-    #                           'holdout_fold={}'.format(holdout_fold),
-    #                           'md_{}_iters.h5'.format(iteration))
+    model_path = os.path.join(workspace, 'models', subdir, filename,
+                              'holdout_fold={}'.format(holdout_fold),
+                              'md_{}_iters_max.h5'.format(iteration))
 
-    model_path = os.path.join(workspace, 'appendixes',
-                              'md_{}_iters_max_74.5.h5'.format(iteration))
+    # model_path = os.path.join(workspace, 'appendixes',
+    #                           'md_{}_iters_max_74.5.h5'.format(iteration))
 
     hdf5_train_path = os.path.join(truncation_dir,
-                                   'train_hpss_l+r_9100.h5')
+                                   'train_hpss_l+r_8000.h5')
     hdf5_validate_path = os.path.join(truncation_dir,
-                                      'validate_hpss_l+r_9100.h5')
+                                      'validate_hpss_l+r_8000.h5')
     train_hf = h5py.File(hdf5_train_path, 'w')
     validate_hf = h5py.File(hdf5_validate_path, 'w')
 
