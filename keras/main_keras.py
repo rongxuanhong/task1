@@ -26,8 +26,13 @@ from earlystop import EarlyStopping
 # model = model.build(input_shape=(3, 320, 64))  # 72.0 0130.log
 # model = Vggish(431, 84, 10)  # 71.3 0032.log
 # model = Vggish_two_attention2(320, 64, 10)  # 71.3 0032.log
-batch_size = 32
+batch_size = 8
+import tensorflow as tf
 
+cf = tf.ConfigProto()
+cf.gpu_options.allow_growth = True
+sess = tf.Session(config=cf)
+K.set_session(sess)
 # train_file = 'fold1_train_new.txt'
 # evaluate_file = 'fold1_validate.txt'
 

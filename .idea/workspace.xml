@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f345f30b-305d-4408-97f9-172f169c0f9a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/keras/main_keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/keras/main_keras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runme.sh" beforeDir="false" afterPath="$PROJECT_DIR$/runme.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main_keras.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main_keras.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8436">
-              <caret line="191" column="33" selection-start-line="191" selection-start-column="23" selection-end-line="191" selection-end-column="33" />
+            <state relative-caret-position="475">
+              <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -29,7 +30,7 @@
         <entry file="file://$PROJECT_DIR$/utils/data_augmentation.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1064">
-              <caret line="61" column="43" lean-forward="true" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
+              <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -38,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/utils/fold1_train_mix.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-18342">
-              <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="27" />
+              <caret column="26" selection-start-column="26" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -47,7 +48,7 @@
         <entry file="file://$PROJECT_DIR$/keras/classification.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="339">
-              <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -58,8 +59,8 @@
       <file leaf-file-name="models_keras.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/keras/models_keras.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5501">
-              <caret line="315" column="32" lean-forward="true" selection-start-line="315" selection-start-column="32" selection-end-line="315" selection-end-column="32" />
+            <state relative-caret-position="3962">
+              <caret line="315" column="32" selection-start-line="315" selection-start-column="32" selection-end-line="315" selection-end-column="32" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -67,11 +68,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="runme.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="runme.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/runme.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data_generator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/data_generator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -87,7 +100,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>random_state</find>
       <find>get_filename</find>
       <find>logging</find>
       <find>feature_extractor</find>
@@ -117,6 +129,7 @@
       <find>Vggish_two_attention</find>
       <find>Vggish_attention_no_fcn</find>
       <find>size</find>
+      <find>batch_size</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -170,12 +183,12 @@
         <option value="$PROJECT_DIR$/keras/classification.py" />
         <option value="$PROJECT_DIR$/utils/data_augmentation.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/keras/main_keras.py" />
         <option value="$PROJECT_DIR$/runme.sh" />
+        <option value="$PROJECT_DIR$/keras/main_keras.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="890" />
     <option name="y" value="84" />
     <option name="width" value="1718" />
@@ -394,7 +407,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="65" y="-4" width="1855" height="1084" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23089519" />
@@ -405,7 +418,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32937366" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32937366" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.24406047" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.34449244" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5561555" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -451,16 +464,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/keras/models_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3572">
-          <caret line="188" selection-start-line="188" selection-end-line="188" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/runme.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="874">
@@ -650,13 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/data_generator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="40" column="28" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/features.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -743,12 +739,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
+    <entry file="file://$PROJECT_DIR$/utils/fold1_train_mix.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8436">
-          <caret line="191" column="33" selection-start-line="191" selection-start-column="23" selection-end-line="191" selection-end-column="33" />
+        <state relative-caret-position="-18342">
+          <caret column="26" selection-start-column="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keras/models_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3962">
+          <caret line="315" column="32" selection-start-line="315" selection-start-column="32" selection-end-line="315" selection-end-column="32" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keras/classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -756,41 +769,41 @@
     <entry file="file://$PROJECT_DIR$/utils/data_augmentation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1064">
-          <caret line="61" column="43" lean-forward="true" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/fold1_train_mix.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18342">
-          <caret column="26" lean-forward="true" selection-start-column="26" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keras/classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keras/models_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5501">
-          <caret line="315" column="32" lean-forward="true" selection-start-line="315" selection-start-column="32" selection-end-line="315" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
+          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/runme.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/data_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/site-packages/keras/backend/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="35" column="36" lean-forward="true" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
