@@ -45,8 +45,8 @@ class LogMelExtractor():
         x = x.T
 
         x = np.dot(x, self.melW)
-        # x = np.log(x + 1e-8)
-        # x = x.astype(np.float32)
+        x = np.log(x + 1e-8)
+        x = x.astype(np.float32)
 
         return x
 
@@ -139,7 +139,6 @@ def calculate_lrad_logmel(audio_path, sample_rate, feature_extractor):
     # audio = audio.T
     h = audio[0] - audio[1]
     p = audio[0] + audio[1]
-    librosa.cqt()
     h_feature = feature_extractor.transform(h)
     p_feature = feature_extractor.transform(p)
 

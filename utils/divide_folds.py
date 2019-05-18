@@ -31,18 +31,19 @@ def plot_data():
 
 def get_validate_data():
     db = dcase_util.datasets.TUTUrbanAcousticScenes_2018_DevelopmentSet(
-        data_path='',
+        data_path='/home/ccyoung/Downloads/TUT-urban-acoustic-scenes-2018-development',
         included_content_types=['meta']
     )
     db.initialize()
-    # db.show()
+    db.show()
     training_files, validation_files = db.validation_split(
         fold=1,
         split_type='balanced',
-        validation_amount=0.1
+        validation_amount=0.1,
     )
     training_files = ['audio/' + x.split('/')[-1] for x in training_files]
     validation_files = ['audio/' + x.split('/')[-1] for x in validation_files]
+    print(training_files)
     base_path = '/home/ccyoung/DCase/data/TUT-urban-acoustic-scenes-2018-development/evaluation_setup/'
     path = base_path + 'fold1_train.txt'
     data = pd.read_csv(path, sep='\t', names=['filename', 'scene'])
@@ -50,7 +51,8 @@ def get_validate_data():
     train_df = data.loc[data['filename'].isin(training_files)]
     validation_df = data.loc[data['filename'].isin(validation_files)]
 
-    # print(validation_files)
+    print(len(validation_files))
+    print(len(training_files))
     # print(len(train_df))
     # print(len(validation_df))
     train_path = base_path + 'fold1_train_new.txt'

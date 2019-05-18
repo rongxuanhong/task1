@@ -16,12 +16,12 @@ def prepare_data(datatype):
     truncation_dir = os.path.join(workspace, 'features', 'truncation',
                                   'holdout_fold={}'.format(1))
     if datatype == 'train':
-        hf = h5py.File(os.path.join(truncation_dir, 'train_hpss_l+r_8000.h5'), 'r')
+        hf = h5py.File(os.path.join(truncation_dir, 'train_hpss_l+r_9600.h5'), 'r')
         features = hf['feature'][:]
         targets = hf['target'][:]
         return features, np.argmax(targets, axis=-1)
     elif datatype == 'validate':
-        hf = h5py.File(os.path.join(truncation_dir, 'validate_hpss_l+r_8000.h5'), 'r')
+        hf = h5py.File(os.path.join(truncation_dir, 'validate_hpss_l+r_9600.h5'), 'r')
         features = hf['feature'][:]
         targets = hf['target'][:]
         return features, np.argmax(targets, axis=-1)
@@ -34,7 +34,7 @@ def model_fit(classifier, max_acc=0):
     print(a.shape)
     if max_acc < score:
         max_acc = score
-    print('The accuracy of validation: {:.3f}　max_acc:{:.3f}'.format(score, max_acc))
+    print('The accuracy of validation: {:.4f}　max_acc:{:.4f}'.format(score, max_acc))
 
 
 def model():

@@ -198,6 +198,45 @@ def plot_confusion_matrix(confusion_matrix, title, labels, values):
     plt.show()
 
 
+def plot_confusion_matrix2(confusion_matrix, title, labels):
+    """Plot confusion matrix.
+
+    Inputs:
+      confusion_matrix: matrix, (classes_num, classes_num)
+      labels: list of labels
+
+    Ouputs:
+      None
+    """
+    plt.rcParams.update({'font.size': 10.5})
+    import itertools
+    fig = plt.figure(figsize=(6, 6))
+    ax = fig.add_subplot(111)
+
+    cax = ax.matshow(confusion_matrix, cmap=plt.cm.Blues)
+
+    if labels:
+        ax.set_xticklabels([''] + labels, rotation=45)
+        ax.set_yticklabels([''] + labels)
+        ax.xaxis.set_ticks_position('bottom')
+
+    ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
+
+    row, column = confusion_matrix.shape
+    confusion_matrix = np.asarray(confusion_matrix, np.int32)
+
+    for i, j in itertools.product(range(row), range(column)):
+        plt.text(j, i, confusion_matrix[i, j], horizontalalignment='center',
+                 color='white' if i == j else "black")
+
+    # plt.title(title)
+    # plt.xlabel('Predicted')
+    # plt.ylabel('Target')
+    plt.tight_layout()
+    plt.show()
+
+
 def write_leaderboard_submission(submission_path, audio_names, predictions):
     ix_to_lb = config.ix_to_lb
 
@@ -268,3 +307,10 @@ def calculate_stats(output, target):
         stats.append(dict)
 
     return stats
+
+
+if __name__ == '__main__':
+    cm = np.load('../data1.npy')
+    labels = ['airport', 'bus', 'metro', 'metro_station', 'park', 'public_square',
+              'shopping_mall', 'street_pedestrian', 'street_traffic', 'tram']
+    plot_confusion_matrix2(cm, 'the confusion matrix of DA-MFCNN', labels)

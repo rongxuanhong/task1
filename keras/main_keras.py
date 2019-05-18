@@ -14,24 +14,25 @@ from datetime import datetime
 
 from data_generator import DataGenerator, TestDataGenerator
 from utilities import (create_folder, get_filename, create_logging,
-                       calculate_confusion_matrix, calculate_accuracy,
+                       calculate_confusion_matrix, calculate_accuracy, plot_confusion_matrix2,
                        plot_confusion_matrix, print_accuracy, calculate_stats,
                        write_leaderboard_submission, write_evaluation_submission, compute_time_consumed)
-from models_keras import BaselineCnn, Vggish, Vggish_single_attention \
-    , Vggish_attention, Gate_CNN_attention, Vggish_two_attention, Vggish_two_attention2
+from models_keras import BaselineCnn, Vggish, Vggish_single_attention, Vggish_two_attentionFPN, Vggish_two_attention, \
+    Vggish_two_attention_up, Vggish_attention_no_fcn
 # from CLR import CyclicLR
 import config
+from earlystop import EarlyStopping
 
-# model = DenseNet(depth_of_model=190, growth_rate=32, num_of_blocks=3, output_classes=10,
-#                  num_layers_in_each_block=5,
-#                  bottleneck=False, compression=1.0, weight_decay=0, dropout_rate=0, pool_initial=True,
-#                  include_top=True)
 # model = model.build(input_shape=(3, 320, 64))  # 72.0 0130.log
-# model = DenseNet([5, 5, 5, 5, 5], (2, 320, 64), classes_num=10)
-# model = DenseNet([5, 5, 5, 5], (3, 320, 64), 10)
 # model = Vggish(431, 84, 10)  # 71.3 0032.log
-model = Vggish_two_attention2(320, 64, 10)  # 71.3 0032.log
+# model = Vggish_two_attention2(320, 64, 10)  # 71.3 0032.log
 batch_size = 8
+
+# train_file = 'fold1_train_new.txt'
+# evaluate_file = 'fold1_validate.txt'
+
+train_file = 'fold1_train.txt'
+evaluate_file = 'fold1_evaluate.txt'
 
 
 def evaluate(model, generator, data_type, devices, max_iteration, ):
@@ -144,7 +145,7 @@ def train(args):
     holdout_fold = args.holdout_fold
     mini_data = args.mini_data
 
-    a = args.a
+    model_arg = args.model
 
     labels = config.labels
     seq_len = config.seq_len
@@ -167,10 +168,10 @@ def train(args):
     if validate:
 
         dev_train_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
-                                     'fold{}_train.txt'.format(holdout_fold))
+                                     train_file)
 
         dev_validate_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
-                                        'fold{}_evaluate.txt'.format(holdout_fold))
+                                        evaluate_file)
 
         models_dir = os.path.join(workspace, 'models', subdir, filename,
                                   'holdout_fold={}'.format(holdout_fold))
@@ -185,6 +186,16 @@ def train(args):
     create_folder(models_dir)
 
     # Model
+    if model_arg == 'attention1':
+        model = Vggish_single_attention(320, 64, 10)
+        logging.info("loading Vggish_single_attention")
+    elif model_arg == 'attention2':
+        model = Vggish_two_attention(320, 64, 10)
+        logging.info("loading Vggish_two_attention")
+    else:
+        model = Vggish_attention_no_fcn(320, 64, 10)
+        logging.info("loading Vggish_attention_no_fcn")
+
     model.summary()
 
     model.compile(loss=keras.losses.categorical_crossentropy,
@@ -207,6 +218,13 @@ def train(args):
     max_iteration = 10000
     max_acc = 0
 
+    # earlyStop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, )
+    # earlyStop.on_train_begin()
+
+    iters = 6122 // batch_size
+    epochs = max_iteration // iters
+    epochs += 1
+    epoch = 0
     for (iteration, (batch_x, batch_y)) in enumerate(generator.generate_train()):
 
         # Evaluate
@@ -230,11 +248,11 @@ def train(args):
                                              devices=devices,
                                              max_iteration=None, )
 
-                if va_acc >= max_acc:
+                if va_acc > max_acc:
                     max_acc = va_acc
-                    if iteration >= 6000:
+                    if iteration >= 5000:
                         save_out_path = os.path.join(
-                            models_dir, 'md_{}_iters_max.h5'.format(iteration))
+                            models_dir, 'md_{}_iters_max_{}_{}.h5'.format(iteration, model_arg, time.time()))
 
                         model.save(save_out_path)
                         logging.info('Model saved to {}'.format(save_out_path))
@@ -244,9 +262,9 @@ def train(args):
             train_time = train_fin_time - train_bgn_time
             validate_time = time.time() - train_fin_time
 
-            logging.info(
-                'iteration: {}, train time: {:.3f} s, validate time: {:.3f} s'
-                ''.format(iteration, train_time, validate_time))
+            logging.info('epoch: {}/{} '
+                         'iteration: {}, train time: {:.3f} s, validate time: {:.3f} s'
+                         ''.format(epoch, epochs, iteration, train_time, validate_time))
 
             logging.info('------------------------------------')
 
@@ -267,9 +285,14 @@ def train(args):
         #
         model.train_on_batch(batch_x, batch_y)
         # clr.on_batch_end()
+        if iteration == iters * epoch:
+            epoch += 1
+        #     earlyStop.on_epoch_end(epoch, logs={'val_loss': va_loss})
+
         # Stop learning
         if iteration == max_iteration + 1:
             compute_time_consumed(start_time)
+            # earlyStop.on_train_end()
             break
 
 
@@ -285,7 +308,10 @@ def create_feature_in_h5py(generator, layer_output, hf, data_type):
         (batch_x, batch_y, batch_audio_names) = data
 
         # Predict
-        batch_output = layer_output([batch_x])[0]
+        if data_type == 'train':
+            batch_output = layer_output([batch_x, 0])[0]
+        else:
+            batch_output = layer_output([batch_x, 0])[0]
         # Append data
         outputs.append(batch_output)
         targets.append(batch_y)
@@ -318,34 +344,34 @@ def inference_data_to_truncation(args):
                              'development_hpss_lrad.h5')
 
     dev_train_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
-                                 'fold{}_train.txt'.format(holdout_fold))
+                                 train_file)
 
     dev_validate_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
-                                    'fold{}_evaluate.txt'.format(holdout_fold))
+                                    evaluate_file)
 
     ### 保存截断特征
     truncation_dir = os.path.join(workspace, 'features', 'truncation',
                                   'holdout_fold={}'.format(holdout_fold))
     create_folder(truncation_dir)
 
-    model_path = os.path.join(workspace, 'models', subdir, filename,
-                              'holdout_fold={}'.format(holdout_fold),
-                              'md_{}_iters_max.h5'.format(iteration))
+    # model_path = os.path.join(workspace, 'models', subdir, filename,
+    #                           'holdout_fold={}'.format(holdout_fold),
+    #                           'md_{}_iters_max'.format(iteration))
 
-    # model_path = os.path.join(workspace, 'appendixes',
-    #                           'md_{}_iters_max_74.5.h5'.format(iteration))
+    model_path = os.path.join(workspace, 'appendixes',
+                              'md_{}_iters_max_76.2_Vggish_two_attention.h5'.format(iteration))
 
     hdf5_train_path = os.path.join(truncation_dir,
-                                   'train_hpss_l+r_8000.h5')
+                                   'train_hpss_l+r_9600.h5')
     hdf5_validate_path = os.path.join(truncation_dir,
-                                      'validate_hpss_l+r_8000.h5')
+                                      'validate_hpss_l+r_9600.h5')
     train_hf = h5py.File(hdf5_train_path, 'w')
     validate_hf = h5py.File(hdf5_validate_path, 'w')
 
     # load model
     model = keras.models.load_model(model_path)
 
-    layer_output = K.function([model.layers[0].input],
+    layer_output = K.function([model.layers[0].input, K.learning_phase()],
                               [model.layers[-2].output])
 
     # Data generator
@@ -356,6 +382,10 @@ def inference_data_to_truncation(args):
 
     create_feature_in_h5py(generator, layer_output, train_hf, data_type='train')
     create_feature_in_h5py(generator, layer_output, validate_hf, data_type='validate')
+
+
+def emsemble_model():
+    pass
 
 
 def inference_validation_data(args):
@@ -390,14 +420,13 @@ def inference_validation_data(args):
     #                           'holdout_fold={}'.format(holdout_fold),
     #                           'md_{}_iters_max.h5'.format(iteration))
     model_path = os.path.join(workspace, 'appendixes',
-                              'md_{}_iters_max_74.5.h5'.format(iteration))
+                              'md_{}_iters_max_75.5_Vggish_two_attention.h5'.format(iteration))
 
     model = keras.models.load_model(model_path)
 
     # Predict & evaluate
     for device in devices:
         print('Device: {}'.format(device))
-
         # Data generator
         generator = DataGenerator(hdf5_path=hdf5_path,
                                   batch_size=batch_size,
@@ -434,15 +463,16 @@ def inference_validation_data(args):
         print('confusion_matrix: \n', confusion_matrix)
 
         # Plot confusion matrix
-        plot_confusion_matrix(
+        # plot_confusion_matrix(
+        #     confusion_matrix,
+        #     title='Device {}'.format(device.upper()),
+        #     labels=labels,
+        #     values=class_wise_accuracy)
+        np.save('data5', confusion_matrix)
+        plot_confusion_matrix2(
             confusion_matrix,
             title='Device {}'.format(device.upper()),
-            labels=labels,
-            values=class_wise_accuracy)
-        # predictions = np.select([outputs >= 0.5, outputs < 0.5], [1, 0])  # 简化if else
-        # print(predictions.shape)
-        # predictions = np.mean(predictions, axis=3)[..., 0]  ## ... 表示省略前面的所有冒号的简写
-        # predictions = np.argmax(predictions, axis=1)
+            labels=labels, )
 
 
 def inference_leaderboard_data(args):
@@ -571,7 +601,7 @@ if __name__ == '__main__':
     parser_train.add_argument('--holdout_fold', type=int)
     parser_train.add_argument('--cuda', action='store_true', default=False)
     parser_train.add_argument('--mini_data', action='store_true', default=False)
-    parser_train.add_argument('--a', type=float)
+    parser_train.add_argument('--model', type=str)
 
     parser_inference_validation_data = subparsers.add_parser('inference_data_to_truncation')
     parser_inference_validation_data.add_argument('--dataset_dir', type=str, required=True)

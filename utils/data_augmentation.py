@@ -60,6 +60,7 @@ def generate_mix_audio():
     for name, group in data:
         print('generate {} audios'.format(name))
         for index, row in group.iterrows():
+            print(row['file'])
             file_path = os.path.join(base_path, row['file'])
             audio_name = os.path.splitext(file_path)[0].split('/')[-1]
             print('generate {} audios'.format(audio_name))
@@ -114,5 +115,5 @@ def generate_meta_mix():
 
 
 if __name__ == '__main__':
-    generate_meta_mix()
+    generate_fold1_train_mix()
     pass
