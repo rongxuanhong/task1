@@ -6,6 +6,7 @@ from utilities import compute_time_consumed
 import time
 import soundfile
 import tqdm
+import sys
 
 sys.path.insert(1, os.path.join(sys.path[0], '../utils'))
 base_path = os.path.join(os.path.expanduser('~'), 'DCase/data/TUT-urban-acoustic-scenes-2018-development')
