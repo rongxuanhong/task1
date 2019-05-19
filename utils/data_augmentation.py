@@ -5,6 +5,7 @@ import librosa
 from utilities import compute_time_consumed
 import time
 import soundfile
+import tqdm
 
 sys.path.insert(1, os.path.join(sys.path[0], '../utils'))
 base_path = os.path.join(os.path.expanduser('~'), 'DCase/data/TUT-urban-acoustic-scenes-2018-development')
@@ -62,7 +63,7 @@ def generate_mix_audio():
     data = data.groupby('label')
     for name, group in data:
         print('generate {} audios'.format(name))
-        for index, row in group.iterrows():
+        for index, row in tqdm.tqdm(group.iterrows(), total=6122):
             print(row['file'])
             file_path = os.path.join(base_path, row['file'])
             audio_name = os.path.splitext(file_path)[0].split('/')[-1]
