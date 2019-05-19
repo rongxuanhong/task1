@@ -67,6 +67,7 @@ def generate_mix_audio():
         for index, row in tqdm.tqdm(group.iterrows(), total=6122):
             print(row['file'])
             file_path = os.path.join(base_path, row['file'])
+            print(file_path)
             audio_name = os.path.splitext(file_path)[0].split('/')[-1]
             print('generate {} audios'.format(audio_name))
 
