@@ -605,6 +605,7 @@ if __name__ == '__main__':
     parser_train.add_argument('--validate', action='store_true', default=False)
     parser_train.add_argument('--holdout_fold', type=int)
     parser_train.add_argument('--cuda', action='store_true', default=False)
+    parser_train.add_argument('--alpha', type=float, required=True)
     parser_train.add_argument('--mini_data', action='store_true', default=False)
     parser_train.add_argument('--model', type=str)
 
