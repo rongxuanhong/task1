@@ -119,7 +119,7 @@ def generate_meta_mix():
 
 
 if __name__ == '__main__':
-    generate_mix_audio()
+    # generate_mix_audio()
     generate_fold1_train_mix()
     generate_meta_mix()
     pass
