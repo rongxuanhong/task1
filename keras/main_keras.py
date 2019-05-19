@@ -220,7 +220,7 @@ def train(args):
     # clr = CyclicLR(model=model, base_lr=0.0001, max_lr=0.0005,
     #                step_size=5000., mode='triangular')
     # clr.on_train_begin()
-    max_iteration = 12000
+    max_iteration = 8000
     max_acc = 0
 
     # earlyStop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, )
