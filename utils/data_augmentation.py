@@ -4,6 +4,9 @@ import os
 import librosa
 from utils.utilities import compute_time_consumed
 import time
+import soundfile
+
+base_path = os.path.join(os.path.expanduser('~'), 'DCase/data/TUT-urban-acoustic-scenes-2018-development')
 
 
 ## random erasing
@@ -52,7 +55,6 @@ def get_random_eraser(p=0.5, s_l=0.02, s_h=0.4, r_1=0.3, r_h=1 / 0.3, v_l=0, v_h
 
 
 def generate_mix_audio():
-    base_path = '/home/ccyoung/DCase/data/TUT-urban-acoustic-scenes-2018-development'
     dev_train_csv = os.path.join(base_path, 'evaluation_setup', 'fold1_train.txt')
 
     data = pd.read_csv(dev_train_csv, sep='\t', names=['file', 'label'])
@@ -65,9 +67,9 @@ def generate_mix_audio():
             audio_name = os.path.splitext(file_path)[0].split('/')[-1]
             print('generate {} audios'.format(audio_name))
 
-            y1, sr = librosa.load(file_path, mono=False)
+            y1, sr = librosa.load(file_path, mono=False, sr=48000)
             sample_audio_file = group.sample(n=1).iloc[0]['file']
-            y2, sr = librosa.load(os.path.join(base_path, sample_audio_file), mono=False)
+            y2, sr = librosa.load(os.path.join(base_path, sample_audio_file), mono=False, sr=48000)
             y = 0.5 * y1 + 0.5 * y2
             new_audio_name = str(audio_name) + '_mix.wav'
             save_path = os.path.join(base_path, 'audio', new_audio_name)
@@ -75,7 +77,6 @@ def generate_mix_audio():
 
 
 def generate_fold1_train_mix():
-    base_path = '/home/ccyoung/DCase/data/TUT-urban-acoustic-scenes-2018-development'
     dev_train_csv = os.path.join(base_path, 'evaluation_setup', 'fold1_train.txt')
 
     data = pd.read_csv(dev_train_csv, sep='\t', names=['file', 'label'])
@@ -91,7 +92,6 @@ def generate_fold1_train_mix():
 
 
 def generate_meta_mix():
-    base_path = '/home/ccyoung/DCase/data/TUT-urban-acoustic-scenes-2018-development'
     dev_train_csv = os.path.join(base_path, 'meta.csv')
 
     data = pd.read_csv(dev_train_csv, sep='\t')
@@ -115,5 +115,7 @@ def generate_meta_mix():
 
 
 if __name__ == '__main__':
+    generate_mix_audio()
     generate_fold1_train_mix()
+    generate_meta_mix()
     pass
