@@ -97,8 +97,9 @@ class DataGenerator(object):
 
         return audio_indexes
 
-    def generate_train(self):
-        """Generate mini-batch data for training. 
+    def generate_train(self, alpha=0.):
+        """Generate mini-batch data for training.
+        alpha: mixup alpha,0 means not use mixup
 
         Returns:
           batch_x: (batch_size, seq_len, freq_bins)
@@ -113,17 +114,6 @@ class DataGenerator(object):
 
         iteration = 0
         pointer = 0
-        # # mixup implementation:
-        # # Note that for larger images, it's more efficient to do mixup on GPUs (i.e. in the graph)
-        # weight = np.random.beta(alpha, alpha, BATCH_SIZE)
-        # x_weight = weight.reshape(BATCH_SIZE, 1, 1, 1)
-        # y_weight = weight.reshape(BATCH_SIZE, 1)
-        # index = np.random.permutation(BATCH_SIZE)
-        #
-        # x1, x2 = images, images[index]
-        # x = x1 * x_weight + x2 * (1 - x_weight)
-        # y1, y2 = one_hot_labels, one_hot_labels[index]
-        # y = y1 * y_weight + y2 * (1 - y_weight)
 
         while True:
 
@@ -138,27 +128,23 @@ class DataGenerator(object):
 
             iteration += 1
             batch_x = self.x[batch_audio_indexes]
-            batch_y = self.y[batch_audio_indexes]  # 训练时使用标签平滑
+            batch_y = self.y[batch_audio_indexes]
 
-            # # mixup implementation
-            # weight = np.random.beta(0.2, 0.2, batch_size)
-            # x_weight = weight.reshape(batch_size, 1, 1, 1)
-            # y_weight = weight.reshape(batch_size, 1)
-            # index = np.random.permutation(batch_size)
-            #
-            # x1, x2 = batch_x, batch_x[index]
-            # x = x1 * x_weight + x2 * (1 - x_weight)
-            # y1, y2 = batch_y, batch_y[index]
-            # y = y1 * y_weight + y2 * (1 - y_weight)
+            if alpha == 0.:
+                yield self.transform(batch_x), batch_y
+            else:
+                # mixup implementation
+                weight = np.random.beta(alpha, alpha, batch_size)
+                x_weight = weight.reshape(batch_size, 1, 1, 1)
+                y_weight = weight.reshape(batch_size, 1)
+                index = np.random.permutation(batch_size)
 
-            # batch_x_new = []
-            # for i in range(batch_size):
-            #     batch_x_new.append(get_random_eraser()(batch_x[i]))
+                x1, x2 = batch_x, batch_x[index]
+                x = x1 * x_weight + x2 * (1 - x_weight)
+                y1, y2 = batch_y, batch_y[index]
+                y = y1 * y_weight + y2 * (1 - y_weight)
 
-            # Transform data
-            batch_x = self.transform(batch_x)
-
-            yield batch_x, batch_y
+                yield self.transform(x), y
 
     def generate_validate(self, data_type, devices, shuffle,
                           max_iteration=None):

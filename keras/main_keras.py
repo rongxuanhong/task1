@@ -26,7 +26,7 @@ from earlystop import EarlyStopping
 # model = model.build(input_shape=(3, 320, 64))  # 72.0 0130.log
 # model = Vggish(431, 84, 10)  # 71.3 0032.log
 # model = Vggish_two_attention2(320, 64, 10)  # 71.3 0032.log
-batch_size = 8
+batch_size = 32
 import tensorflow as tf
 
 cf = tf.ConfigProto()
@@ -220,7 +220,7 @@ def train(args):
     # clr = CyclicLR(model=model, base_lr=0.0001, max_lr=0.0005,
     #                step_size=5000., mode='triangular')
     # clr.on_train_begin()
-    max_iteration = 10000
+    max_iteration = 12000
     max_acc = 0
 
     # earlyStop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, )
@@ -230,7 +230,7 @@ def train(args):
     epochs = max_iteration // iters
     epochs += 1
     epoch = 0
-    for (iteration, (batch_x, batch_y)) in enumerate(generator.generate_train()):
+    for (iteration, (batch_x, batch_y)) in enumerate(generator.generate_train(alpha=0.2)):
 
         # Evaluate
         if iteration % 100 == 0:
@@ -275,16 +275,16 @@ def train(args):
 
             train_bgn_time = time.time()
 
-        # Save model
-        if iteration % 1000 == 0 and iteration > 0:
-            save_out_path = os.path.join(
-                models_dir, 'md_{}_iters.h5'.format(iteration))
-
-            model.save(save_out_path)
-            logging.info('Model saved to {}'.format(save_out_path))
+        # # Save model
+        # if iteration % 1000 == 0 and iteration > 0:
+        #     save_out_path = os.path.join(
+        #         models_dir, 'md_{}_iters.h5'.format(iteration))
+        #
+        #     model.save(save_out_path)
+        #     logging.info('Model saved to {}'.format(save_out_path))
 
         # # # Reduce learning rate
-        if iteration % 300 == 0 and iteration > 0:
+        if iteration % 200 == 0 and iteration > 0:
             old_lr = float(K.get_value(model.optimizer.lr))
             K.set_value(model.optimizer.lr, old_lr * 0.9)
         #
