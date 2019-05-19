@@ -1,0 +1,5 @@
+tqdm
+pandas
+soundfile
+librosa
+tensorflow>=1.10
