@@ -1,11 +1,11 @@
 #!/bin/bash
 # You need to modify this path
-#DATASET_DIR="/home/r506/DCase/data"
-DATASET_DIR="/home/ccyoung/DCase/data"
+DATASET_DIR="/home/r506/DCase/data"
+#DATASET_DIR="/home/ccyoung/DCase/data"
 
 # You need to modify this path as your workspace
-#WORKSPACE="/home/r506/Downloads/dcase2018_task1-master"
-WORKSPACE="/home/ccyoung/Downloads/dcase2018_task1-master"
+WORKSPACE="/home/r506/Downloads/dcase2018_task1-master"
+#WORKSPACE="/home/ccyoung/Downloads/dcase2018_task1-master"
 
 DEV_SUBTASK_A_DIR="TUT-urban-acoustic-scenes-2018-development"
 #DEV_SUBTASK_B_DIR="TUT-urban-acoustic-scenes-2018-mobile-development"
