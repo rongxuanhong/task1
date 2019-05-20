@@ -2,12 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f345f30b-305d-4408-97f9-172f169c0f9a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/fold1_train_mix.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/meta_mix.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dcase2018_task1-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dcase2018_task1-master.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keras/main_keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/keras/main_keras.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runme.sh" beforeDir="false" afterPath="$PROJECT_DIR$/runme.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/data_augmentation.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_augmentation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/fold1_train_mix.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/meta_mix.csv" beforeDir="false" afterPath="$PROJECT_DIR$/utils/meta_mix.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/practice.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="features.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/features.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="286" column="44" selection-start-line="286" selection-start-column="44" selection-end-line="286" selection-end-column="44" />
+            <state relative-caret-position="408">
+              <caret line="222" lean-forward="true" selection-start-line="222" selection-end-line="222" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -27,13 +33,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data_augmentation.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/utils/data_augmentation.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/runme.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="122" column="26" selection-start-line="122" selection-start-column="26" selection-end-line="122" selection-end-column="26" />
+            <state relative-caret-position="289">
+              <caret line="32" column="79" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="79">
+              <caret line="156" column="28" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -50,7 +65,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>get_filename</find>
       <find>logging</find>
       <find>feature_extractor</find>
       <find>stockholm-175</find>
@@ -80,6 +94,7 @@
       <find>size</find>
       <find>batch_size</find>
       <find>Vggish_two_attention</find>
+      <find>evaluate_file</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,23 +145,23 @@
         <option value="$PROJECT_DIR$/keras/classification.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/utils/DownloadDCaseData.py" />
-        <option value="$PROJECT_DIR$/utils/data_generator.py" />
-        <option value="$PROJECT_DIR$/keras/main_keras.py" />
         <option value="$PROJECT_DIR$/utils/unzip_data.py" />
-        <option value="$PROJECT_DIR$/utils/practice.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/runme.sh" />
         <option value="$PROJECT_DIR$/utils/features.py" />
+        <option value="$PROJECT_DIR$/utils/practice.py" />
         <option value="$PROJECT_DIR$/utils/data_augmentation.py" />
+        <option value="$PROJECT_DIR$/utils/data_generator.py" />
+        <option value="$PROJECT_DIR$/runme.sh" />
+        <option value="$PROJECT_DIR$/keras/main_keras.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="890" />
-    <option name="y" value="84" />
-    <option name="width" value="1718" />
-    <option name="height" value="987" />
+    <option name="x" value="47" />
+    <option name="y" value="25" />
+    <option name="width" value="1319" />
+    <option name="height" value="743" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -154,26 +169,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="dcase2018_task1-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dcase2018_task1-master" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="dcase2018_task1-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dcase2018_task1-master" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="dcase2018_task1-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -185,11 +180,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -233,6 +230,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="data_augmentation" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dcase2018_task1-master" />
@@ -251,6 +251,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="plot_figures" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dcase2018_task1-master" />
@@ -269,6 +272,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="practice" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dcase2018_task1-master" />
@@ -287,6 +293,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="utilities" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dcase2018_task1-master" />
@@ -305,13 +314,16 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.utilities" />
-      <item itemvalue="Python.plot_figures" />
       <item itemvalue="Python.classification" />
       <item itemvalue="Python.data_augmentation" />
+      <item itemvalue="Python.plot_figures" />
       <item itemvalue="Python.practice" />
+      <item itemvalue="Python.utilities" />
     </list>
     <recent_temporary>
       <list>
@@ -361,170 +373,73 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
+    <frame x="47" y="25" width="1319" height="743" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23089519" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23011583" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.27243066" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.5561555" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32937366" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.35313174" />
-      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32937366" />
-      <window_info anchor="bottom" id="Python Console" order="7" weight="0.32937366" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.1911447" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.5561555" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32937366" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.19086461" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32937366" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17139737" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32937366" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.28293738" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
-      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32937366" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.28293738" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5561555" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32937366" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32937366" />
       <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.22030237" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32937366" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="modify network" />
     <MESSAGE value="modify" />
     <option name="LAST_COMMIT_MESSAGE" value="modify" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="10" />
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0027.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-11595" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0039.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-13780" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0040.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-13829" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0038.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-13818" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/site-packages/keras/layers/convolutional.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="1827" column="28" selection-start-line="1827" selection-start-column="28" selection-end-line="1827" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0044.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-11477" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0035.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-13799" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0034.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="356">
-          <caret line="747" column="103" lean-forward="true" selection-start-line="747" selection-start-column="103" selection-end-line="747" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0032.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-4840" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0031.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-12564">
-          <caret line="60" column="103" lean-forward="true" selection-start-line="60" selection-start-column="103" selection-end-line="60" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0030.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-11462" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0033.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-13785" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0047.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-13755" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0048.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-13818" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0052.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-171" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0050.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-11643" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0051.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-12840" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0054.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-13799" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0042.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-11044" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2018.1/system/python_stubs/-1496775346/itertools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="525" column="8" selection-start-line="525" selection-start-column="8" selection-end-line="525" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0039.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0040.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0038.log" />
+    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/keras/layers/convolutional.py" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0044.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0035.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0034.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0032.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0031.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0030.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0033.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0047.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0048.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0052.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0050.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0051.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0054.log" />
+    <entry file="file://$PROJECT_DIR$/logs/main_keras/0042.log" />
+    <entry file="file://$PROJECT_DIR$/../.PyCharmCE2018.1/system/python_stubs/-1496775346/itertools.py" />
     <entry file="file://$PROJECT_DIR$/utils/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -532,13 +447,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2018.1/system/python_stubs/-1496775346/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="159" column="4" selection-start-line="159" selection-start-column="4" selection-end-line="159" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../.PyCharmCE2018.1/system/python_stubs/-1496775346/builtins.py" />
     <entry file="file://$PROJECT_DIR$/utils/LogAnalyzer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="943">
@@ -546,41 +455,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/site-packages/matplotlib/pyplot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="3828" column="4" selection-start-line="3828" selection-start-column="4" selection-end-line="3828" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/site-packages/matplotlib/axes/_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61845">
-          <caret line="3293" column="34" selection-start-line="3293" selection-start-column="34" selection-end-line="3293" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/site-packages/matplotlib/font_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="503">
-          <caret line="385" column="38" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/site-packages/matplotlib/axis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33706">
-          <caret line="1795" column="42" selection-start-line="1795" selection-start-column="42" selection-end-line="1795" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/appendixes/note">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/matplotlib/pyplot.py" />
+    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/matplotlib/axes/_base.py" />
+    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/matplotlib/font_manager.py" />
+    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/matplotlib/axis.py" />
+    <entry file="file://$PROJECT_DIR$/appendixes/note" />
     <entry file="file://$PROJECT_DIR$/utils/plot_figures.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1786">
@@ -608,13 +487,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/site-packages/keras/backend/tensorflow_backend.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="114" column="4" selection-start-line="114" selection-start-column="4" selection-end-line="114" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/keras/backend/tensorflow_backend.py" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -622,13 +495,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/fold1_train_mix.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18342">
-          <caret column="26" selection-start-column="26" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/fold1_train_mix.txt" />
     <entry file="file://$PROJECT_DIR$/keras/classification.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
@@ -639,23 +506,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/site-packages/keras/backend/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="55" column="4" selection-start-line="55" selection-start-column="4" selection-end-line="55" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/MixupGenerator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/keras/backend/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/utils/MixupGenerator.py" />
     <entry file="file://$PROJECT_DIR$/utils/audio_augmentaton_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
@@ -666,44 +518,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="902">
-          <caret line="607" column="66" selection-start-line="607" selection-start-column="62" selection-end-line="607" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/python3.5/zipfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="1326" column="54" lean-forward="true" selection-start-line="1326" selection-start-column="54" selection-end-line="1326" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/venv/tensorflow/lib/python3.5/os.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="222" column="31" lean-forward="true" selection-start-line="222" selection-start-column="31" selection-end-line="222" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///usr/lib/python3.5/zipfile.py" />
+    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/os.py" />
     <entry file="file://$PROJECT_DIR$/utils/unzip_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-44">
           <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/practice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -730,13 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/data_generator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -751,30 +564,67 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/runme.sh">
+    <entry file="file://$PROJECT_DIR$/utils/practice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+        <state relative-caret-position="340">
+          <caret line="61" column="8" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/features.py">
+    <entry file="file://$PROJECT_DIR$/utils/meta_mix.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="286" column="44" selection-start-line="286" selection-start-column="44" selection-end-line="286" selection-end-column="44" />
+        <state relative-caret-position="-250569">
+          <caret line="5" column="61" lean-forward="true" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/data_augmentation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="110" column="46" lean-forward="true" selection-start-line="110" selection-start-column="46" selection-end-line="110" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/data_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="39" column="24" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="79">
+          <caret line="156" column="28" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/data_augmentation.py">
+    <entry file="file://$PROJECT_DIR$/utils/features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="122" column="26" selection-start-line="122" selection-start-column="26" selection-end-line="122" selection-end-column="26" />
+        <state relative-caret-position="408">
+          <caret line="222" lean-forward="true" selection-start-line="222" selection-end-line="222" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/runme.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="32" column="79" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
         </state>
       </provider>
     </entry>

@@ -101,15 +101,15 @@ def generate_meta_mix():
     data = pd.read_csv(dev_train_csv, sep='\t')
     filename, scene_label, identifier, source_label = [], [], [], []
     for index, row in data.iterrows():
-        if index > 6121:
-            break
+
+        if index <= 6121:
+            filename.append(row['filename'].replace('.wav', '_mix.wav'))
+            scene_label.append(row['scene_label'])
+            source_label.append(row['source_label'])
+            identifier.append(row['identifier'])
         filename.append(row['filename'])
-        filename.append(row['filename'].replace('.wav', '_mix.wav'))
-        scene_label.append(row['scene_label'])
         scene_label.append(row['scene_label'])
         identifier.append(row['identifier'])
-        identifier.append(row['identifier'])
-        source_label.append(row['source_label'])
         source_label.append(row['source_label'])
     new_data = pd.DataFrame(
         data={'filename': filename, 'scene_label': scene_label, 'identifier': identifier, 'source_label': source_label},
@@ -120,6 +120,6 @@ def generate_meta_mix():
 
 if __name__ == '__main__':
     # generate_mix_audio()
-    generate_fold1_train_mix()
+    # generate_fold1_train_mix()
     generate_meta_mix()
     pass

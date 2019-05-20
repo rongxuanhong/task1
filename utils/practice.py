@@ -42,5 +42,21 @@ def load_audio():
 
 
 if __name__ == '__main__':
-    # load_audio()
+    from data_generator import DataGenerator
+
+    workspace = "/home/r506/Downloads/dcase2018_task1-master"
+    subdir='TUT-urban-acoustic-scenes-2018-development'
+    hdf5_path = os.path.join(workspace, 'features', 'logmel', subdir,
+                             'development_hpss_lrad_mix.h5')
+    dev_train_csv = os.path.join('/home/r506/DCase/data', subdir, 'evaluation_setup',
+                                 'fold1_train_mix.txt')
+
+    dev_validate_csv = os.path.join('/home/r506/DCase/data', subdir, 'evaluation_setup',
+                                    'fold1_evaluate.txt')
+    generator = DataGenerator(hdf5_path=hdf5_path,
+                              batch_size=8,
+                              dev_train_csv=dev_train_csv,
+                              dev_validate_csv=dev_validate_csv,
+                              )
+    generator.train()
     pass

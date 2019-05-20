@@ -67,6 +67,7 @@ class DataGenerator(object):
             self.validate_audio_indexes = self.get_audio_indexes_from_csv(
                 dev_validate_csv)
 
+
             logging.info('Split development data to {} training and {} '
                          'validation data. '.format(len(self.train_audio_indexes),
                                                     len(self.validate_audio_indexes)))

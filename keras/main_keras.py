@@ -26,7 +26,7 @@ from earlystop import EarlyStopping
 # model = model.build(input_shape=(3, 320, 64))  # 72.0 0130.log
 # model = Vggish(431, 84, 10)  # 71.3 0032.log
 # model = Vggish_two_attention2(320, 64, 10)  # 71.3 0032.log
-batch_size = 32
+batch_size = 64
 import tensorflow as tf
 
 cf = tf.ConfigProto()
@@ -36,7 +36,7 @@ K.set_session(sess)
 # train_file = 'fold1_train_new.txt'
 # evaluate_file = 'fold1_validate.txt'
 
-train_file = 'fold1_train.txt'
+train_file = 'fold1_train_mix.txt'
 evaluate_file = 'fold1_evaluate.txt'
 
 
@@ -149,6 +149,7 @@ def train(args):
     validate = args.validate
     holdout_fold = args.holdout_fold
     mini_data = args.mini_data
+    alpha = args.alpha
 
     model_arg = args.model
 
@@ -168,7 +169,7 @@ def train(args):
                                  'mini_development.h5')
     else:
         hdf5_path = os.path.join(workspace, 'features', 'logmel', subdir,
-                                 'development_hpss_lrad.h5')
+                                 'development_hpss_lrad_mix.h5')
 
     if validate:
 
@@ -226,11 +227,11 @@ def train(args):
     # earlyStop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, )
     # earlyStop.on_train_begin()
 
-    iters = 6122 // batch_size
+    iters = 6122 * 2 // batch_size
     epochs = max_iteration // iters
     epochs += 1
     epoch = 0
-    for (iteration, (batch_x, batch_y)) in enumerate(generator.generate_train(alpha=0.2)):
+    for (iteration, (batch_x, batch_y)) in enumerate(generator.generate_train(alpha=alpha)):
 
         # Evaluate
         if iteration % 100 == 0:
