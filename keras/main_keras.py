@@ -1,7 +1,5 @@
 import os
 import sys
-
-sys.path.insert(1, os.path.join(sys.path[0], '../utils'))
 import numpy as np
 import argparse
 import h5py
@@ -12,6 +10,7 @@ import keras
 import keras.backend as K
 from datetime import datetime
 
+sys.path.insert(1, os.path.join(sys.path[0], '../utils'))
 from data_generator import DataGenerator, TestDataGenerator
 from utilities import (create_folder, get_filename, create_logging,
                        calculate_confusion_matrix, calculate_accuracy, plot_confusion_matrix2,
@@ -20,15 +19,15 @@ from utilities import (create_folder, get_filename, create_logging,
 from models_keras import BaselineCnn, Vggish, Vggish_single_attention, Vggish_two_attentionFPN, Vggish_two_attention, \
     Vggish_two_attention_up, Vggish_attention_no_fcn
 # from CLR import CyclicLR
+import tensorflow as tf
 import config
+from datetime import datetime
 from earlystop import EarlyStopping
 
 # model = model.build(input_shape=(3, 320, 64))  # 72.0 0130.log
 # model = Vggish(431, 84, 10)  # 71.3 0032.log
 # model = Vggish_two_attention2(320, 64, 10)  # 71.3 0032.log
-batch_size = 64
-import tensorflow as tf
-
+batch_size = 32
 cf = tf.ConfigProto()
 cf.gpu_options.allow_growth = True
 sess = tf.Session(config=cf)
@@ -36,7 +35,7 @@ K.set_session(sess)
 # train_file = 'fold1_train_new.txt'
 # evaluate_file = 'fold1_validate.txt'
 
-train_file = 'fold1_train_mix.txt'
+train_file = 'fold1_train.txt'
 evaluate_file = 'fold1_evaluate.txt'
 
 
@@ -169,7 +168,7 @@ def train(args):
                                  'mini_development.h5')
     else:
         hdf5_path = os.path.join(workspace, 'features', 'logmel', subdir,
-                                 'development_hpss_lrad_mix.h5')
+                                 'development_hpss_lrad.h5')
 
     if validate:
 
@@ -221,13 +220,13 @@ def train(args):
     # clr = CyclicLR(model=model, base_lr=0.0001, max_lr=0.0005,
     #                step_size=5000., mode='triangular')
     # clr.on_train_begin()
-    max_iteration = 8000
+    max_iteration = 10000
     max_acc = 0
 
     # earlyStop = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, )
     # earlyStop.on_train_begin()
 
-    iters = 6122 * 2 // batch_size
+    iters = 6122 // batch_size
     epochs = max_iteration // iters
     epochs += 1
     epoch = 0
@@ -257,8 +256,9 @@ def train(args):
                 if va_acc > max_acc:
                     max_acc = va_acc
                     if iteration >= 5000:
+                        save_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                         save_out_path = os.path.join(
-                            models_dir, 'md_{}_iters_max_{}_{}.h5'.format(iteration, model_arg, time.time()))
+                            models_dir, 'md_{}_iters_max_{}_{}.h5'.format(iteration, model_arg, save_time))
 
                         model.save(save_out_path)
                         logging.info('Model saved to {}'.format(save_out_path))
@@ -355,22 +355,22 @@ def inference_data_to_truncation(args):
     dev_validate_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
                                     evaluate_file)
 
-    ### 保存截断特征
+    # 保存截断特征
     truncation_dir = os.path.join(workspace, 'features', 'truncation',
                                   'holdout_fold={}'.format(holdout_fold))
     create_folder(truncation_dir)
 
-    # model_path = os.path.join(workspace, 'models', subdir, filename,
-    #                           'holdout_fold={}'.format(holdout_fold),
-    #                           'md_{}_iters_max'.format(iteration))
+    model_path = os.path.join(workspace, 'models', subdir, filename,
+                              'holdout_fold={}'.format(holdout_fold),
+                              'md_{}_iters_max_attention2_2019-05-27 10:50:32.h5'.format(iteration))
 
-    model_path = os.path.join(workspace, 'appendixes',
-                              'md_{}_iters_max_76.2_Vggish_two_attention.h5'.format(iteration))
+    # model_path = os.path.join(workspace, 'appendixes',
+    #                           'md_{}_iters_max_76.2_Vggish_two_attention.h5'.format(iteration))
 
     hdf5_train_path = os.path.join(truncation_dir,
-                                   'train_hpss_l+r_9600.h5')
+                                   'train_hpss_l+r_9100.h5')
     hdf5_validate_path = os.path.join(truncation_dir,
-                                      'validate_hpss_l+r_9600.h5')
+                                      'validate_hpss_l+r_9100.h5')
     train_hf = h5py.File(hdf5_train_path, 'w')
     validate_hf = h5py.File(hdf5_validate_path, 'w')
 
@@ -388,10 +388,6 @@ def inference_data_to_truncation(args):
 
     create_feature_in_h5py(generator, layer_output, train_hf, data_type='train')
     create_feature_in_h5py(generator, layer_output, validate_hf, data_type='validate')
-
-
-def emsemble_model():
-    pass
 
 
 def inference_validation_data(args):

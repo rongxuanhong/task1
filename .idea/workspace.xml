@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f345f30b-305d-4408-97f9-172f169c0f9a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dcase2018_task1-master.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dcase2018_task1-master.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keras/classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/keras/classification.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/keras/main_keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/keras/main_keras.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/keras/models_keras.py" beforeDir="false" afterPath="$PROJECT_DIR$/keras/models_keras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runme.sh" beforeDir="false" afterPath="$PROJECT_DIR$/runme.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data_augmentation.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_augmentation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/data_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/data_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/fold1_train_mix.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/meta_mix.csv" beforeDir="false" afterPath="$PROJECT_DIR$/utils/meta_mix.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/DownloadDCaseData.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/DownloadDCaseData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/LogAnalyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/LogAnalyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/features.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/features.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/practice.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/practice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/unzip_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/unzip_data.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,22 +22,70 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/features.py">
+        <entry file="file://$PROJECT_DIR$/runme.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="222" lean-forward="true" selection-start-line="222" selection-end-line="222" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="306">
+              <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/runme.sh">
+        <entry file="file://$PROJECT_DIR$/keras/classification.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="32" column="79" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
+            <state relative-caret-position="364">
+              <caret line="113" column="77" selection-start-line="113" selection-start-column="77" selection-end-line="113" selection-end-column="77" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/data_generator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2788">
+              <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/data_augmentation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" selection-start-line="8" selection-end-line="10" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../anaconda3/envs/tensorflow/lib/python3.6/site-packages/sklearn/svm/classes.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1503">
+              <caret line="609" column="8" selection-start-line="609" selection-start-column="8" selection-end-line="609" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/keras/models_keras.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="281" selection-start-line="281" selection-end-line="281" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,11 +93,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="156" column="28" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
+            <state relative-caret-position="225">
+              <caret line="457" column="46" lean-forward="true" selection-start-line="457" selection-start-column="46" selection-end-line="457" selection-end-column="46" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/utilities.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="156" column="18" selection-start-line="156" selection-start-column="4" selection-end-line="156" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/LogAnalyzer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="68" column="21" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -137,23 +206,23 @@
         <option value="$PROJECT_DIR$/utils/divide_folds.py" />
         <option value="$PROJECT_DIR$/keras/MyEarlyStop.py" />
         <option value="$PROJECT_DIR$/keras/earlystop.py" />
-        <option value="$PROJECT_DIR$/utils/LogAnalyzer.py" />
         <option value="$PROJECT_DIR$/appendixes/note" />
         <option value="$PROJECT_DIR$/utils/plot_figures.py" />
-        <option value="$PROJECT_DIR$/keras/models_keras.py" />
         <option value="$PROJECT_DIR$/utils/utilities.py" />
-        <option value="$PROJECT_DIR$/keras/classification.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/utils/DownloadDCaseData.py" />
-        <option value="$PROJECT_DIR$/utils/unzip_data.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/utils/features.py" />
-        <option value="$PROJECT_DIR$/utils/practice.py" />
         <option value="$PROJECT_DIR$/utils/data_augmentation.py" />
         <option value="$PROJECT_DIR$/utils/data_generator.py" />
-        <option value="$PROJECT_DIR$/runme.sh" />
+        <option value="$PROJECT_DIR$/utils/DownloadDCaseData.py" />
+        <option value="$PROJECT_DIR$/utils/unzip_data.py" />
+        <option value="$PROJECT_DIR$/utils/features.py" />
+        <option value="$PROJECT_DIR$/keras/models_keras.py" />
+        <option value="$PROJECT_DIR$/utils/practice.py" />
         <option value="$PROJECT_DIR$/keras/main_keras.py" />
+        <option value="$PROJECT_DIR$/runme.sh" />
+        <option value="$PROJECT_DIR$/utils/LogAnalyzer.py" />
+        <option value="$PROJECT_DIR$/keras/classification.py" />
       </list>
     </option>
   </component>
@@ -180,12 +249,36 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="task1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="task1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task1" type="462c0819:PsiDirectoryNode" />
+              <item name="keras" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="task1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="task1" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="task1" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../2019_task1" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
@@ -212,7 +305,49 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.data_augmentation">
+  <component name="RunManager" selected="Python.classification">
+    <configuration name="DownloadDCaseData" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="dcase2018_task1-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/DownloadDCaseData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="LogAnalyzer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="dcase2018_task1-master" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/LogAnalyzer.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="classification" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dcase2018_task1-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -226,48 +361,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/keras/classification.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="data_augmentation" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="dcase2018_task1-master" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/data_augmentation.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="plot_figures" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="dcase2018_task1-master" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/plot_figures.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -297,7 +390,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="utilities" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="unzip_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="dcase2018_task1-master" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -309,7 +402,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/utilities.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/unzip_data.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -319,19 +412,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.DownloadDCaseData" />
+      <item itemvalue="Python.LogAnalyzer" />
       <item itemvalue="Python.classification" />
-      <item itemvalue="Python.data_augmentation" />
-      <item itemvalue="Python.plot_figures" />
       <item itemvalue="Python.practice" />
-      <item itemvalue="Python.utilities" />
+      <item itemvalue="Python.unzip_data" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.data_augmentation" />
-        <item itemvalue="Python.practice" />
         <item itemvalue="Python.classification" />
-        <item itemvalue="Python.utilities" />
-        <item itemvalue="Python.plot_figures" />
+        <item itemvalue="Python.LogAnalyzer" />
+        <item itemvalue="Python.practice" />
+        <item itemvalue="Python.unzip_data" />
+        <item itemvalue="Python.DownloadDCaseData" />
       </list>
     </recent_temporary>
   </component>
@@ -374,20 +467,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="47" y="25" width="1319" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23011583" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32937366" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27243066" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32626426" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.07667211" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5561555" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32937366" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="8" weight="0.32937366" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.19086461" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.19086461" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32937366" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -421,10 +515,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="modify" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0039.log" />
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0040.log" />
-    <entry file="file://$PROJECT_DIR$/logs/main_keras/0038.log" />
-    <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/keras/layers/convolutional.py" />
     <entry file="file://$PROJECT_DIR$/logs/main_keras/0044.log" />
     <entry file="file://$PROJECT_DIR$/logs/main_keras/0035.log" />
     <entry file="file://$PROJECT_DIR$/logs/main_keras/0034.log" />
@@ -440,21 +530,7 @@
     <entry file="file://$PROJECT_DIR$/logs/main_keras/0054.log" />
     <entry file="file://$PROJECT_DIR$/logs/main_keras/0042.log" />
     <entry file="file://$PROJECT_DIR$/../.PyCharmCE2018.1/system/python_stubs/-1496775346/itertools.py" />
-    <entry file="file://$PROJECT_DIR$/utils/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="73" lean-forward="true" selection-start-line="9" selection-end-line="10" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../.PyCharmCE2018.1/system/python_stubs/-1496775346/builtins.py" />
-    <entry file="file://$PROJECT_DIR$/utils/LogAnalyzer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="943">
-          <caret line="81" column="24" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/matplotlib/pyplot.py" />
     <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/matplotlib/axes/_base.py" />
     <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/matplotlib/font_manager.py" />
@@ -466,16 +542,6 @@
           <caret line="99" selection-start-line="99" selection-end-line="99" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/utilities.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="213" column="29" lean-forward="true" selection-start-line="213" selection-start-column="29" selection-end-line="213" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -496,60 +562,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/fold1_train_mix.txt" />
-    <entry file="file://$PROJECT_DIR$/keras/classification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/site-packages/keras/backend/__init__.py" />
     <entry file="file://$PROJECT_DIR$/utils/MixupGenerator.py" />
-    <entry file="file://$PROJECT_DIR$/utils/audio_augmentaton_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.5/zipfile.py" />
     <entry file="file://$PROJECT_DIR$/../venv/tensorflow/lib/python3.5/os.py" />
-    <entry file="file://$PROJECT_DIR$/utils/unzip_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keras/models_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-621">
-          <caret line="267" column="34" selection-start-line="267" selection-start-column="34" selection-end-line="267" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/DownloadDCaseData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="40" column="28" selection-start-line="40" selection-start-column="28" selection-end-line="40" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -564,16 +580,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/practice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="61" column="8" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/meta_mix.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-250569">
@@ -581,50 +587,152 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/data_augmentation.py">
+    <entry file="file://$PROJECT_DIR$/meta_mix.csv" />
+    <entry file="file://$PROJECT_DIR$/../.PyCharmCE2019.1/system/python_stubs/-1986951793/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="110" column="46" lean-forward="true" selection-start-line="110" selection-start-column="46" selection-end-line="110" selection-end-column="46" />
+        <state relative-caret-position="134">
+          <caret line="2949" column="8" selection-start-line="2949" selection-start-column="8" selection-end-line="2949" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/unzip_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="26" selection-start-line="36" selection-start-column="26" selection-end-line="36" selection-end-column="26" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/data_generator.py">
+    <entry file="file://$PROJECT_DIR$/utils/DownloadDCaseData.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="39" column="24" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="24" />
+        <state relative-caret-position="209">
+          <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="156" column="28" selection-start-line="156" selection-start-column="28" selection-end-line="156" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/features.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="222" lean-forward="true" selection-start-line="222" selection-end-line="222" />
+        <state relative-caret-position="3621">
+          <caret line="214" selection-start-line="214" selection-end-line="214" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/audio_augmentaton_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/divide_folds.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/practice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/LogAnalyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="68" column="21" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/runme.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="32" column="79" selection-start-line="32" selection-start-column="79" selection-end-line="32" selection-end-column="79" />
+        <state relative-caret-position="306">
+          <caret line="18" column="14" lean-forward="true" selection-start-line="18" selection-start-column="14" selection-end-line="18" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../anaconda3/envs/tensorflow/lib/python3.6/site-packages/sklearn/svm/classes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1503">
+          <caret line="609" column="8" selection-start-line="609" selection-start-column="8" selection-end-line="609" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keras/models_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="281" selection-start-line="281" selection-end-line="281" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keras/main_keras.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="457" column="46" lean-forward="true" selection-start-line="457" selection-start-column="46" selection-end-line="457" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/data_augmentation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="10" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/data_generator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2788">
+          <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="156" column="18" selection-start-line="156" selection-start-column="4" selection-end-line="156" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/keras/classification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="113" column="77" selection-start-line="113" selection-start-column="77" selection-end-line="113" selection-end-column="77" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

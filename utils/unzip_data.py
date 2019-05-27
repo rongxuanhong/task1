@@ -3,9 +3,8 @@ import shutil
 import os
 
 #########  home下的Downloads文件夹和DCase文件夹 #############3
-BASE_PATH = 'Downloads/'
-DEV_DATA_PATH = 'DCase/data/TUT-urban-acoustic-scenes-2018-development-data/audio/'
-DEV_TUT_NAME = 'TUT-urban-acoustic-scenes-2018-development'
+DEV_DATA_PATH = 'DCase/data/'
+DEV_TUT_NAME = 'TAU-urban-acoustic-scenes-2019-development'
 
 
 # LEADBOARD_TUT_NAME = 'TUT-urban-acoustic-scenes-2018-leaderboard'
@@ -23,16 +22,19 @@ def un_zip(filename, DATA_PATH):
     zip_file.close()
 
 
-def start(DATA_PATH, TUT_NAME, total):
+def start(total):
     file_list = []
     for index in range(total):
         file_list.append(os.path.join(os.path.expanduser('~'),
-                                      BASE_PATH + TUT_NAME + '.audio.' + str(index + 1) + '.zip?download=1'))
+                                      'Downloads', DEV_TUT_NAME + '.audio.' + str(index + 1) + '.zip?download=1'))
 
-    for filename in file_list:
-        un_zip(filename, os.path.join(os.path.expanduser('~'), DATA_PATH))
+    for i, filename in enumerate(file_list):
+        if i>1:
+            print(filename)
+            un_zip(filename, os.path.join(os.path.expanduser('~'), DEV_DATA_PATH))
 
 
 if __name__ == '__main__':
-    start(DEV_DATA_PATH, DEV_TUT_NAME, 13)
-    # start(LEADBORAD_DATA_PATH, LEADBOARD_TUT_NAME, 3)
+    start(21)
+#   start(DEV_DATA_PATH, DEV_TUT_NAME, 21)
+# start(LEADBORAD_DATA_PATH, LEADBOARD_TUT_NAME, 3)

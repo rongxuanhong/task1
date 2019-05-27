@@ -200,7 +200,7 @@ def calculate_multi_features(args):
     audio_dir = os.path.join(dataset_dir, subdir, 'audio')
 
     if data_type == 'development':
-        meta_csv = os.path.join(dataset_dir, subdir, 'meta_mix.csv')
+        meta_csv = os.path.join(dataset_dir, subdir, 'meta.csv')
 
     elif data_type in ['leaderboard', 'evaluation']:
         evaluation_csv = os.path.join(dataset_dir, subdir, 'evaluation_setup',
@@ -211,7 +211,7 @@ def calculate_multi_features(args):
                                  'mini_{}.h5'.format(data_type))
     else:
         hdf5_path = os.path.join(workspace, 'features', 'logmel', subdir,
-                                 '{}_hpss_lrad_mix.h5'.format(data_type))
+                                 '{}_hpss_lrad_2019.h5'.format(data_type))
 
     create_folder(os.path.dirname(hdf5_path))
 

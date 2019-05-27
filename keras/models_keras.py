@@ -273,19 +273,21 @@ def Vggish_two_attention(seq_len, mel_bins, classes_num):
 
     input_layer = Input(shape=(3, seq_len, mel_bins))
 
-    x1 = VggishConvBlock(input=input_layer, filters=64, data_format=data_format, weight_decay=1e-4)
-    x2 = VggishConvBlock(input=x1, filters=128, data_format=data_format, weight_decay=1e-4)
-    x3 = VggishConvBlock(input=x2, filters=256, data_format=data_format, weight_decay=1e-4)
-    x4 = VggishConvBlock(input=x3, filters=512, data_format=data_format, weight_decay=1e-4)
+    weight_decay = 5e-4
+
+    x1 = VggishConvBlock(input=input_layer, filters=64, data_format=data_format, weight_decay=weight_decay)
+    x2 = VggishConvBlock(input=x1, filters=128, data_format=data_format, weight_decay=weight_decay)
+    x3 = VggishConvBlock(input=x2, filters=256, data_format=data_format, weight_decay=weight_decay)
+    x4 = VggishConvBlock(input=x3, filters=512, data_format=data_format, weight_decay=weight_decay)
 
     deconv_x4 = Conv2DTranspose(256, 3, strides=2, padding='same', data_format=data_format, use_bias=False,
-                                kernel_regularizer=l2(1e-4))(x4)
+                                kernel_regularizer=l2(weight_decay))(x4)
     deconv_x4 = BatchNormalization(axis=bn_axis)(deconv_x4)
     deconv_x4 = Activation('relu')(deconv_x4)
     x_34 = Add()([deconv_x4, x3])
 
     deconv_x3 = Conv2DTranspose(128, 3, strides=2, padding='same', data_format=data_format, use_bias=False,
-                                kernel_regularizer=l2(1e-4))(x3)  # 这里换成FPN形式:10000就基本拟合 73.8 非金字塔效果更好
+                                kernel_regularizer=l2(weight_decay))(x3)  # 这里换成FPN形式:10000就基本拟合 73.8 非金字塔效果更好
     deconv_x3 = BatchNormalization(axis=bn_axis)(deconv_x3)
     deconv_x3 = Activation('relu')(deconv_x3)
     x_23 = Add()([deconv_x3, x2])

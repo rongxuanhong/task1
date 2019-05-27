@@ -73,10 +73,10 @@ def plot_experiment(log_path):
 
 
 def show_log_curve(index):
-    workspace = "/home/ccyoung/Downloads/dcase2018_task1-master"
+    workspace = "/home/r506/Downloads/dcase2018_task1-master"
     log_path = os.path.join(workspace, 'logs', 'main_keras', '{}.log'.format(index))
     plot_experiment(log_path)
 
 
 if __name__ == '__main__':
-    show_log_curve('0071')
+    show_log_curve('0077')

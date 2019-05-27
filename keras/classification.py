@@ -3,38 +3,50 @@ import numpy as np
 import h5py
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, AdaBoostClassifier
 from sklearn.model_selection import GridSearchCV
-import xgboost as xgb
-from xgboost.sklearn import XGBClassifier
+# import xgboost as xgb
+# from xgboost.sklearn import XGBClassifier
 from sklearn.metrics import classification_report
 from sklearn.svm import SVC
 from sklearn.metrics import f1_score, make_scorer, precision_score
 import os
+import sys
+
+sys.path.insert(1, os.path.join(sys.path[0], '../utils'))
+from utilities import calculate_accuracy, calculate_confusion_matrix, plot_confusion_matrix2, print_accuracy
+import config as cfg
 
 
 def prepare_data(datatype):
-    workspace = "/home/ccyoung/Downloads/dcase2018_task1-master"
+    workspace = os.path.join(os.path.expanduser('~'), "Downloads/dcase2018_task1-master")
     truncation_dir = os.path.join(workspace, 'features', 'truncation',
                                   'holdout_fold={}'.format(1))
     if datatype == 'train':
-        hf = h5py.File(os.path.join(truncation_dir, 'train_hpss_l+r_9600.h5'), 'r')
+        hf = h5py.File(os.path.join(truncation_dir, 'train_hpss_l+r_9100.h5'), 'r')
         features = hf['feature'][:]
         targets = hf['target'][:]
         return features, np.argmax(targets, axis=-1)
     elif datatype == 'validate':
-        hf = h5py.File(os.path.join(truncation_dir, 'validate_hpss_l+r_9600.h5'), 'r')
+        hf = h5py.File(os.path.join(truncation_dir, 'validate_hpss_l+r_9100.h5'), 'r')
         features = hf['feature'][:]
         targets = hf['target'][:]
         return features, np.argmax(targets, axis=-1)
 
 
-def model_fit(classifier, max_acc=0):
-    X_val, y_val = prepare_data(datatype='validate')
-    score = classifier.score(X_val, y_val)
-    a = classifier.predict(X_val)
-    print(a.shape)
-    if max_acc < score:
-        max_acc = score
-    print('The accuracy of validation: {:.4f}　max_acc:{:.4f}'.format(score, max_acc))
+def model_validate(classifier, class_wise_accuracy=False, plot_confusion_matrix=False):
+    x_val, y_val = prepare_data(datatype='validate')
+    if class_wise_accuracy:
+        predict = classifier.predict(x_val)
+        if plot_confusion_matrix:
+            cm = calculate_confusion_matrix(y_val, predict, 10)
+            plot_confusion_matrix2(cm, "svm", cfg.labels)
+        class_wise_accuracy = calculate_accuracy(y_val, predict, 10)
+        print_accuracy(class_wise_accuracy, cfg.labels)
+        score = np.mean(class_wise_accuracy)
+    else:
+
+        score = classifier.score(x_val, y_val)
+        print('The accuracy of validation: {:.4f}'.format(score))
+    return score
 
 
 def model():
@@ -85,12 +97,19 @@ def train():
     for c3 in c1:
         for c4 in c2:
             print(c3, c4)
-            classifier = SVC(C=c3, gamma=c4, random_state=10)
+            classifier = SVC(C=c3, gamma=c4, random_state=10, probability=True)
             X_train, y_train = prepare_data(datatype='train')
             classifier.fit(X_train, y_train)
-            model_fit(classifier, max_acc)
+            score = model_validate(classifier)
+            max_acc = max(max_acc, score)
+
+    print('max score：{:.4f}'.format(max_acc))
 
 
 if __name__ == '__main__':
-    train()
+    # train()
+    classifier = SVC(C=0.5, gamma=1e-4, random_state=10, probability=True)
+    X_train, y_train = prepare_data(datatype='train')
+    classifier.fit(X_train, y_train)
+    model_validate(classifier, class_wise_accuracy=True, plot_confusion_matrix=True)
     pass

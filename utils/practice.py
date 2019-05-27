@@ -41,22 +41,18 @@ def load_audio():
     hf2.close()
 
 
+def func():
+    path = os.path.join(os.path.expanduser('~'), 'DCase', 'data', 'TAU-urban-acoustic-scenes-2019-development', 'audio')
+    cnt = 0
+    for file in os.listdir(path):
+        size = os.path.getsize(os.path.join(path, file))
+        size = size // 1024
+        if size != 2812:
+            cnt += 1
+
+    print(cnt)
+
+
 if __name__ == '__main__':
-    from data_generator import DataGenerator
-
-    workspace = "/home/r506/Downloads/dcase2018_task1-master"
-    subdir='TUT-urban-acoustic-scenes-2018-development'
-    hdf5_path = os.path.join(workspace, 'features', 'logmel', subdir,
-                             'development_hpss_lrad_mix.h5')
-    dev_train_csv = os.path.join('/home/r506/DCase/data', subdir, 'evaluation_setup',
-                                 'fold1_train_mix.txt')
-
-    dev_validate_csv = os.path.join('/home/r506/DCase/data', subdir, 'evaluation_setup',
-                                    'fold1_evaluate.txt')
-    generator = DataGenerator(hdf5_path=hdf5_path,
-                              batch_size=8,
-                              dev_train_csv=dev_train_csv,
-                              dev_validate_csv=dev_validate_csv,
-                              )
-    generator.train()
-    pass
+    from datetime import datetime
+    print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
