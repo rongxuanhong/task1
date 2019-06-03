@@ -107,9 +107,9 @@ def train():
 
 
 if __name__ == '__main__':
-    # train()
-    classifier = SVC(C=0.5, gamma=1e-4, random_state=10, probability=True)
-    X_train, y_train = prepare_data(datatype='train')
-    classifier.fit(X_train, y_train)
-    model_validate(classifier, class_wise_accuracy=True, plot_confusion_matrix=True)
+    train()
+    # classifier = SVC(C=0.5, gamma=1e-4, random_state=10, probability=True)
+    # X_train, y_train = prepare_data(datatype='train')
+    # classifier.fit(X_train, y_train)
+    # model_validate(classifier, class_wise_accuracy=True, plot_confusion_matrix=True)
     pass

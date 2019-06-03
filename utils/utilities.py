@@ -210,11 +210,13 @@ def plot_confusion_matrix2(confusion_matrix, title, labels):
     """
     plt.rcParams.update({'font.size': 10.5})
     import itertools
-    fig = plt.figure(figsize=(6, 6))
+    fig = plt.figure(figsize=(8, 8))
     ax = fig.add_subplot(111)
 
     cax = ax.matshow(confusion_matrix, cmap=plt.cm.Blues)
 
+    ax.set_xlabel('Predicted')
+    ax.set_ylabel('Target')
     if labels:
         ax.set_xticklabels([''] + labels, rotation=45)
         ax.set_yticklabels([''] + labels)
@@ -230,9 +232,9 @@ def plot_confusion_matrix2(confusion_matrix, title, labels):
         plt.text(j, i, confusion_matrix[i, j], horizontalalignment='center',
                  color='white' if i == j else "black")
 
-    # plt.title(title)
-    # plt.xlabel('Predicted')
-    # plt.ylabel('Target')
+    plt.title(title)
+    ttl = ax.title
+    ttl.set_position([.5, 1.01])
     plt.tight_layout()
     plt.show()
 

@@ -79,4 +79,4 @@ def show_log_curve(index):
 
 
 if __name__ == '__main__':
-    show_log_curve('0077')
+    show_log_curve('0198')

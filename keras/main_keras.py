@@ -17,7 +17,7 @@ from utilities import (create_folder, get_filename, create_logging,
                        plot_confusion_matrix, print_accuracy, calculate_stats,
                        write_leaderboard_submission, write_evaluation_submission, compute_time_consumed)
 from models_keras import BaselineCnn, Vggish, Vggish_single_attention, Vggish_two_attentionFPN, Vggish_two_attention, \
-    Vggish_two_attention_up, Vggish_attention_no_fcn
+    Vggish_single_attention_MF, Vggish_attention_no_fcn, Vggish_3attentionn
 # from CLR import CyclicLR
 import tensorflow as tf
 import config
@@ -197,9 +197,15 @@ def train(args):
     elif model_arg == 'attention2':
         model = Vggish_two_attention(320, 64, 10)
         logging.info("loading Vggish_two_attention")
+    elif model_arg == 'attention3':
+        model = Vggish_3attentionn(320, 64, 10)
+        logging.info("loading Vggish_3attention")
+    elif model_arg == 'attention5':
+        model = Vggish_single_attention_MF(320, 64, 10)
+        logging.info("loading Vggish_single_attention_MF")
     else:
         model = Vggish_attention_no_fcn(320, 64, 10)
-        logging.info("loading Vggish_attention_no_fcn")
+        logging.info("loading Vggish_2attention_no_fcn")
 
     model.summary()
 
@@ -362,15 +368,15 @@ def inference_data_to_truncation(args):
 
     model_path = os.path.join(workspace, 'models', subdir, filename,
                               'holdout_fold={}'.format(holdout_fold),
-                              'md_{}_iters_max_attention2_2019-05-27 10:50:32.h5'.format(iteration))
+                              'md_{}_iters_max_attention2_2019-05-31 00:48:09.h5'.format(iteration))
 
     # model_path = os.path.join(workspace, 'appendixes',
     #                           'md_{}_iters_max_76.2_Vggish_two_attention.h5'.format(iteration))
 
     hdf5_train_path = os.path.join(truncation_dir,
-                                   'train_hpss_l+r_9100.h5')
+                                   'train_hpss_l+r_6900.h5')
     hdf5_validate_path = os.path.join(truncation_dir,
-                                      'validate_hpss_l+r_9100.h5')
+                                      'validate_hpss_l+r_6900.h5')
     train_hf = h5py.File(hdf5_train_path, 'w')
     validate_hf = h5py.File(hdf5_validate_path, 'w')
 
@@ -397,7 +403,7 @@ def inference_validation_data(args):
     workspace = args.workspace
     holdout_fold = args.holdout_fold
     iteration = args.iteration
-    # filename = args.filename
+    filename = args.filename
 
     # data_type = args.data_type
 
@@ -420,10 +426,13 @@ def inference_validation_data(args):
 
     # model_path = os.path.join(workspace, 'models', subdir, filename,
     #                           'holdout_fold={}'.format(holdout_fold),
-    #                           'md_{}_iters_max.h5'.format(iteration))
-    model_path = os.path.join(workspace, 'appendixes',
-                              'md_{}_iters_max_75.5_Vggish_two_attention.h5'.format(iteration))
+    #                           'md_{}_iters_max_attention2_2019-05-31 10:33:46.h5'.format(iteration))
+    # model_path = os.path.join(workspace, 'appendixes',
+    #                           'md_{}_iters_max_attention2_2019-05-31 00:48:09.h5'.format(iteration))
 
+    model_path = '/home/r506/Downloads/dcase2018_task1-master/models/' \
+                 'TUT-urban-acoustic-scenes-2018-development/main_keras/' \
+                 'new/DAN-DFF/md_9700_iters_max_attention2_78.1.h5'
     model = keras.models.load_model(model_path)
 
     # Predict & evaluate
@@ -473,7 +482,7 @@ def inference_validation_data(args):
         np.save('data5', confusion_matrix)
         plot_confusion_matrix2(
             confusion_matrix,
-            title='Device {}'.format(device.upper()),
+            title='The best performance of the proposed DAN-DFF method',
             labels=labels, )
 
 

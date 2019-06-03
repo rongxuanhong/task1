@@ -264,7 +264,62 @@ def Vggish_attention_no_fcn(seq_len, mel_bins, classes_num):  # 0.753+(0.5 svm)=
     return model
 
 
-def Vggish_two_attention(seq_len, mel_bins, classes_num):
+def Vggish_3attentionn(seq_len, mel_bins, classes_num):
+    data_format = 'channels_first'
+    if data_format == 'channels_first':
+        bn_axis = 1
+
+    else:
+        raise Exception('Only support channels_first now!')
+
+    input_layer = Input(shape=(3, seq_len, mel_bins))
+    # x = Reshape((1, seq_len, mel_bins))(input_layer)
+
+    weight_decay = 5e-4
+
+    x0 = VggishConvBlock(input=input_layer, filters=64, data_format=data_format, weight_decay=weight_decay)
+    x_2 = VggishConvBlock(input=x0, filters=128, data_format=data_format, weight_decay=weight_decay)
+    x_1 = VggishConvBlock(input=x_2, filters=256, data_format=data_format, weight_decay=weight_decay)
+    x = VggishConvBlock(input=x_1, filters=512, data_format=data_format, weight_decay=weight_decay)
+
+    x5 = Conv2D(filters=16, kernel_size=(1, 1), data_format=data_format)(x_2)
+    x5 = BatchNormalization(axis=bn_axis)(x5)
+    x5 = Activation('sigmoid')(x5)
+    x6 = Conv2D(filters=16, kernel_size=(1, 1), data_format=data_format)(x_2)
+    x6 = BatchNormalization(axis=bn_axis)(x6)
+    x6 = Activation('softmax')(x6)
+    x6 = Lambda(lambda x: K.log(x), )(x6)
+
+    x1 = Conv2D(filters=64, kernel_size=(1, 1), data_format=data_format)(x)
+    x1 = BatchNormalization(axis=bn_axis)(x1)
+    x1 = Activation('sigmoid')(x1)
+    x2 = Conv2D(filters=64, kernel_size=(1, 1), data_format=data_format)(x)
+    x2 = BatchNormalization(axis=bn_axis)(x2)
+    x2 = Activation('softmax')(x2)
+    x2 = Lambda(lambda x: K.log(x), )(x2)
+
+    x3 = Conv2D(filters=32, kernel_size=(1, 1), data_format=data_format)(x_1)
+    x3 = BatchNormalization(axis=bn_axis)(x3)
+    x3 = Activation('sigmoid')(x3)
+    x4 = Conv2D(filters=32, kernel_size=(1, 1), data_format=data_format)(x_1)
+    x4 = BatchNormalization(axis=bn_axis)(x4)
+    x4 = Activation('softmax')(x4)
+    x4 = Lambda(lambda x: K.log(x), )(x4)
+
+    x11 = Lambda(attention_pooling, output_shape=pooling_shape, )([x1, x2])
+    x22 = Lambda(attention_pooling, output_shape=pooling_shape, )([x3, x4])
+    x33 = Lambda(attention_pooling, output_shape=pooling_shape, )([x5, x6])
+
+    x = Concatenate(axis=-1)([x11, x22, x33])
+    x = Dense(classes_num)(x)
+    x = Activation('softmax')(x)
+
+    model = Model(inputs=input_layer, outputs=x)
+
+    return model
+
+
+def Vggish_two_attention(seq_len, mel_bins, classes_num):  ### add 换成 concatenate
     data_format = 'channels_first'
     if data_format == 'channels_first':
         bn_axis = 1
@@ -284,13 +339,13 @@ def Vggish_two_attention(seq_len, mel_bins, classes_num):
                                 kernel_regularizer=l2(weight_decay))(x4)
     deconv_x4 = BatchNormalization(axis=bn_axis)(deconv_x4)
     deconv_x4 = Activation('relu')(deconv_x4)
-    x_34 = Add()([deconv_x4, x3])
+    x_34 = Concatenate(axis=-1)([deconv_x4, x3])
 
     deconv_x3 = Conv2DTranspose(128, 3, strides=2, padding='same', data_format=data_format, use_bias=False,
                                 kernel_regularizer=l2(weight_decay))(x3)  # 这里换成FPN形式:10000就基本拟合 73.8 非金字塔效果更好
     deconv_x3 = BatchNormalization(axis=bn_axis)(deconv_x3)
     deconv_x3 = Activation('relu')(deconv_x3)
-    x_23 = Add()([deconv_x3, x2])
+    x_23 = Concatenate(axis=-1)([deconv_x3, x2])
 
     x_1 = Conv2D(filters=64, kernel_size=(1, 1), data_format=data_format)(x_34)
     x_1 = BatchNormalization(axis=bn_axis)(x_1)
@@ -322,7 +377,7 @@ def Vggish_two_attention(seq_len, mel_bins, classes_num):
     return model
 
 
-def Vggish_two_attention_up(seq_len, mel_bins, classes_num):  # 75.8(+-0.1)
+def Vggish_single_attention_MF(seq_len, mel_bins, classes_num):
     data_format = 'channels_first'
     if data_format == 'channels_first':
         bn_axis = 1
@@ -342,33 +397,27 @@ def Vggish_two_attention_up(seq_len, mel_bins, classes_num):  # 75.8(+-0.1)
     upconv_x4 = BatchNormalization(axis=bn_axis)(upconv_x4)
     upconv_x4 = Activation('relu')(upconv_x4)
     x_34 = Add()([upconv_x4, x3])
+    x_34 = Conv2D(filters=128, kernel_size=(1, 1), data_format=data_format)(x_34)
 
     upconv_x3 = UpSampling2D(data_format=data_format, )(x3)
     upconv_x3 = Conv2D(filters=128, kernel_size=(1, 1), data_format=data_format)(upconv_x3)
     upconv_x3 = BatchNormalization(axis=bn_axis)(upconv_x3)
     upconv_x3 = Activation('relu')(upconv_x3)
     x_23 = Add()([upconv_x3, x2])
+    x_23 = Conv2D(filters=128, kernel_size=(1, 1), strides=2, data_format=data_format)(x_23)
 
-    x_1 = Conv2D(filters=64, kernel_size=(1, 1), data_format=data_format)(x_34)
+    x = Concatenate(axis=-1)([x_34, x_23])
+
+    x_1 = Conv2D(filters=64, kernel_size=(1, 1), data_format=data_format)(x)
     x_1 = BatchNormalization(axis=bn_axis)(x_1)
     x_1 = Activation('sigmoid')(x_1)
-    x_2 = Conv2D(filters=64, kernel_size=(1, 1), data_format=data_format)(x_34)
+    x_2 = Conv2D(filters=64, kernel_size=(1, 1), data_format=data_format)(x)
     x_2 = BatchNormalization(axis=bn_axis)(x_2)
     x_2 = Activation('softmax')(x_2)
     x_2 = Lambda(lambda x: K.log(x), )(x_2)
 
-    x_3 = Conv2D(filters=32, kernel_size=(1, 1), data_format=data_format)(x_23)
-    x_23 = BatchNormalization(axis=bn_axis)(x_23)
-    x_3 = Activation('sigmoid')(x_3)
-    x_4 = Conv2D(filters=32, kernel_size=(1, 1), data_format=data_format)(x_23)
-    x_4 = BatchNormalization(axis=bn_axis)(x_4)
-    x_4 = Activation('softmax')(x_4)
-    x_4 = Lambda(lambda x: K.log(x), )(x_4)
+    x = Lambda(attention_pooling, output_shape=pooling_shape, )([x_1, x_2])
 
-    x11 = Lambda(attention_pooling, output_shape=pooling_shape, )([x_1, x_2])
-    x22 = Lambda(attention_pooling, output_shape=pooling_shape, )([x_3, x_4])
-
-    x = Concatenate(axis=-1)([x11, x22])
     x = Dense(classes_num)(x)
     x = Activation('softmax')(x)
 
@@ -433,7 +482,7 @@ def Vggish_two_attentionFPN(seq_len, mel_bins, classes_num):
 
 
 if __name__ == '__main__':
-    model = Vggish_two_attention_up(320, 64, 10)
+    model = Vggish_single_attention_MF(320, 64, 10)
     model.summary()
     # K.clear_session()
     # import tensorflow as tf
